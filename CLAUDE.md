@@ -8,23 +8,42 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-**HTML-страницы:**
-- `home.html` — основная русская версия (~900 строк, но строки длинные — 50-100KB каждая, общий размер ~370KB)
+### Два типа страниц
+
+**Tilda-страницы (home.html):**
+- `home.html` — основная русская версия (~650 строк, строки длинные — 50-100KB каждая, общий размер ~370KB)
 - `home-ru.html` — резервная копия оригинала
-- `blackout-shtory-dubai.html`, `tyul-na-zakaz-dubai.html`, `karnizy-dubai.html`, `motorizirovannye-shtory-dubai.html`, `zhalyuzi-dubai.html` — продуктовые страницы
+- Построены на Tilda-фреймворке: абсолютное позиционирование (T396), div-блоки с ID `recXXXXXX`
+- Зависят от Tilda CSS/JS из `assets/css/` и `assets/js/`
 
-**Python-утилиты:**
-- `clone_page.py` — клонирует страницу с curtainsfactory.ae, парсит через BeautifulSoup, скачивает ассеты, перезаписывает пути
-- `download_fonts.py` — скачивает Google Fonts (Ubuntu, Montserrat), генерирует `assets/css/fonts.css`
-- `fix_images.py` — переcкачивает изображения с Tilda CDN, исправляет lazy-loading
+**Генерируемые продуктовые страницы (семантический HTML):**
+- `blackout-shtory-dubai.html`, `tyul-na-zakaz-dubai.html`, `karnizy-dubai.html`, `motorizirovannye-shtory-dubai.html`, `zhalyuzi-dubai.html`
+- Создаются скриптом `generate_pages.py` — семантический HTML, `<details>` для FAQ, BreadcrumbList schema
+- Не зависят от Tilda CSS/JS — свои встроенные стили
+- Перегенерация: `python3 generate_pages.py`
 
-**Ассеты (`assets/`):**
-- `css/` — Tilda CSS-фреймворк (11 файлов) + `fonts.css`
-- `js/` — jQuery 1.10.2, HammerJS, модули Tilda (21 файл, включая `tilda-phone-mask-1.1.min.js`)
-- `fonts/` — woff2-файлы Ubuntu и Montserrat (11 файлов)
-- `images/` — WebP-фото продуктов, UI-элементы (54 файла)
+### Python-утилиты
 
-**SEO:** `robots.txt`, `sitemap.xml`, Schema.org JSON-LD (LocalBusiness + FAQPage) в home.html
+| Скрипт | Назначение |
+|--------|-----------|
+| `generate_pages.py` | Генерирует 5 продуктовых лендингов с schema, аналитикой, навигацией |
+| `optimize_images.py` | Конвертирует PNG/JPG → WebP через Pillow (качество 80, экономия ~90%) |
+| `clone_page.py` | Клонирует страницу с curtainsfactory.ae, скачивает ассеты |
+| `download_fonts.py` | Скачивает Google Fonts (Ubuntu, Montserrat) → `assets/fonts/` |
+| `fix_images.py` | Переcкачивает изображения с Tilda CDN, исправляет lazy-loading |
+
+### Ассеты
+
+`assets/` содержит как организованные подпапки, так и файлы в корне (legacy от clone_page.py):
+- `css/` (11 файлов) — Tilda CSS + `fonts.css`
+- `js/` (21 файл) — jQuery 1.10.2, HammerJS, модули Tilda
+- `fonts/` (11 woff2) — Ubuntu и Montserrat
+- `images/` (54 файла) — PNG-оригиналы + WebP-версии
+- Корень `assets/` — дубли изображений и скриптов (legacy, используются в home.html напрямую)
+
+**Конфигурации:** `assets_mapping.json` (URL → локальный файл), `assets_to_download.json` (манифест для clone_page.py)
+
+**SEO:** `robots.txt`, `sitemap.xml` (индексируются только 3 из 6 страниц), Schema.org JSON-LD в каждой странице
 
 ## Commands
 
@@ -34,6 +53,12 @@ python3 -m http.server 8888
 
 # Публичный туннель для тестирования на телефоне
 ssh -R 80:localhost:8888 -o ServerAliveInterval=30 serveo.net
+
+# Перегенерировать продуктовые страницы после изменений в generate_pages.py
+python3 generate_pages.py
+
+# Конвертировать изображения в WebP (требует: pip3 install Pillow)
+python3 optimize_images.py
 
 # Клонировать страницу и скачать все ассеты
 python3 clone_page.py

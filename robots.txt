@@ -4,6 +4,6 @@ Disallow: /assets/js/
 Disallow: /assets/css/
 Disallow: /*.json$
 
-Sitemap: /sitemap.xml
+Sitemap: https://curtainsfactory.ae/sitemap.xml
 
 # Curtains World — шторы на заказ в Дубае
