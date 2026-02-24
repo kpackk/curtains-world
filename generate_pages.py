@@ -533,7 +533,9 @@ def generate_page(page):
   <meta name="yandex-verification" content="ce618f2e30367a5c">
 
   <!-- Favicon -->
-  <link href="assets/curtain_1.png" rel="shortcut icon" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1a2e">
 
   <!-- CSS -->
   <link href="assets/tilda-grid-3.0.min.css" rel="stylesheet">
