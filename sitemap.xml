@@ -3,43 +3,24 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://curtainsfactory.ae/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://curtainsfactory.ae/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://curtainsfactory.ae/en/" />
+    <loc>/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="/" />
     <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://curtainsfactory.ae/assets/Mask_group.png</image:loc>
+      <image:loc>/assets/_2024-02-07_14131410.webp</image:loc>
       <image:title>Шторы на заказ в Дубае — Curtains World</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://curtainsfactory.ae/blackout-shtory-dubai</loc>
+    <loc>/blackout-shtory-dubai.html</loc>
     <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://curtainsfactory.ae/tyul-na-zakaz-dubai</loc>
-    <lastmod>2026-02-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://curtainsfactory.ae/motorizirovannye-shtory-dubai</loc>
-    <lastmod>2026-02-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://curtainsfactory.ae/zhalyuzi-dubai</loc>
-    <lastmod>2026-02-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://curtainsfactory.ae/karnizy-dubai</loc>
+    <loc>/tyul-na-zakaz-dubai.html</loc>
     <lastmod>2026-02-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
