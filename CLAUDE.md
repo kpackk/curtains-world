@@ -4,7 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Статический сайт «Curtains World» — шторы на заказ в Дубае (домен: curtainsfactory.ae). Клон Tilda-сайта, полностью локализованный для автономного хостинга. Ноль внешних CDN-зависимостей — все ассеты (JS, CSS, шрифты, изображения) скачаны локально.
+Статический сайт «Curtains World» — шторы на заказ в Дубае (домен: curtainsfactory.ae). Клон Tilda-сайта, полностью локализованный для автономного хостинга. Ноль внешних CDN-зависимостей — все ассеты (JS, CSS, шрифты, изображения) скачаны локально. Все изображения в формате WebP.
+
+**Хостинг:** GitHub Pages — https://kpackk.github.io/curtains-world/
+**Репозиторий:** https://github.com/kpackk/curtains-world
 
 ## Architecture
 
@@ -38,12 +41,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `css/` (11 файлов) — Tilda CSS + `fonts.css`
 - `js/` (21 файл) — jQuery 1.10.2, HammerJS, модули Tilda
 - `fonts/` (11 woff2) — Ubuntu и Montserrat
-- `images/` (54 файла) — PNG-оригиналы + WebP-версии
-- Корень `assets/` — дубли изображений и скриптов (legacy, используются в home.html напрямую)
+- `images/` (21 файл) — только WebP
+- Корень `assets/` — WebP-изображения и скрипты (legacy, используются в home.html напрямую)
 
 **Конфигурации:** `assets_mapping.json` (URL → локальный файл), `assets_to_download.json` (манифест для clone_page.py)
 
-**SEO:** `robots.txt`, `sitemap.xml` (индексируются только 3 из 6 страниц), Schema.org JSON-LD в каждой странице
+**SEO:** `robots.txt`, `sitemap.xml` (все 6 страниц), Schema.org JSON-LD в каждой странице
 
 ## Commands
 
