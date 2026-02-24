@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Статический сайт «Curtains World» — шторы на заказ в Дубае (домен: curtainsfactory.ae). Клон Tilda-сайта, полностью локализованный для автономного хостинга. Ноль внешних CDN-зависимостей — все ассеты (JS, CSS, шрифты, изображения) скачаны локально. Все изображения в формате WebP.
+Статический сайт «Curtains World» — шторы на заказ в Дубае (домен: curtainsfactory.ae). Клон Tilda-сайта, полностью локализованный для автономного хостинга. Ноль внешних CDN-зависимостей — все ассеты (JS, CSS, шрифты, изображения) скачаны локально. Все изображения в формате WebP. Единственная внешняя зависимость — виджет калькулятора ucalc.pro (загружается по scroll).
 
 **Хостинг:** GitHub Pages — https://kpackk.github.io/curtains-world/
 **Репозиторий:** https://github.com/kpackk/curtains-world
@@ -13,17 +13,21 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Два типа страниц
 
-**Tilda-страницы (home.html):**
+**Tilda-страница (home.html):**
 - `home.html` — основная русская версия (~650 строк, строки длинные — 50-100KB каждая, общий размер ~370KB)
-- `home-ru.html` — резервная копия оригинала
-- Построены на Tilda-фреймворке: абсолютное позиционирование (T396), div-блоки с ID `recXXXXXX`
-- Зависят от Tilda CSS/JS из `assets/css/` и `assets/js/`
+- Построена на Tilda-фреймворке: абсолютное позиционирование (T396), div-блоки с ID `recXXXXXX`
+- Зависит от Tilda CSS/JS из `assets/css/` и `assets/js/`
+- Schema.org JSON-LD: `HomeAndConstructionBusiness`
 
 **Генерируемые продуктовые страницы (семантический HTML):**
 - `blackout-shtory-dubai.html`, `tyul-na-zakaz-dubai.html`, `karnizy-dubai.html`, `motorizirovannye-shtory-dubai.html`, `zhalyuzi-dubai.html`
 - Создаются скриптом `generate_pages.py` — семантический HTML, `<details>` для FAQ, BreadcrumbList schema
 - Не зависят от Tilda CSS/JS — свои встроенные стили
 - Перегенерация: `python3 generate_pages.py`
+
+**Служебные страницы:**
+- `index.html` — meta refresh редирект на `home.html`
+- `404.html` — страница ошибки (тёмная тема, шрифты Ubuntu/Montserrat, кнопка на главную)
 
 ### Python-утилиты
 
@@ -39,14 +43,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `assets/` содержит как организованные подпапки, так и файлы в корне (legacy от clone_page.py):
 - `css/` (11 файлов) — Tilda CSS + `fonts.css`
-- `js/` (21 файл) — jQuery 1.10.2, HammerJS, модули Tilda
-- `fonts/` (11 woff2) — Ubuntu и Montserrat
+- `js/` (15 файлов) — jQuery 1.10.2, HammerJS, модули Tilda, tilda-phone-mask
+- `fonts/` (11 woff2) — Ubuntu и Montserrat (кириллические подмножества предзагружаются через preload)
 - `images/` (21 файл) — только WebP
-- Корень `assets/` — WebP-изображения и скрипты (legacy, используются в home.html напрямую)
+- Корень `assets/` — 20 WebP-изображений и 14 JS-скриптов (legacy, используются в home.html напрямую)
 
 **Конфигурации:** `assets_mapping.json` (URL → локальный файл), `assets_to_download.json` (манифест для clone_page.py)
 
-**SEO:** `robots.txt`, `sitemap.xml` (все 6 страниц), Schema.org JSON-LD в каждой странице
+**SEO:** `robots.txt`, `sitemap.xml` (все 6 страниц), Schema.org JSON-LD в каждой странице, `favicon.ico` + `apple-touch-icon.png` (180x180)
 
 ## Commands
 
