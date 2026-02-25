@@ -1105,6 +1105,56 @@ ALL_BLOG_ARTICLES = [
     ("blog-shtory-dlya-arendnoj-kvartiry-dubai", "Шторы для арендной квартиры"),
 ]
 
+# Product → related blog articles (for cross-linking)
+PRODUCT_BLOG_RELATED = {
+    "blackout-shtory-dubai": [
+        ("blog-blackout-shtory-plyusy-minusy", "Блэкаут шторы: плюсы и минусы"),
+        ("blog-kak-vybrat-shtory-dubai", "Как выбрать шторы в Дубае"),
+    ],
+    "tyul-na-zakaz-dubai": [
+        ("blog-kak-vybrat-shtory-dubai", "Как выбрать шторы в Дубае"),
+        ("blog-ukhod-za-shtorami-oae", "Уход за шторами в ОАЭ"),
+    ],
+    "motorizirovannye-shtory-dubai": [
+        ("blog-motorizirovannye-shtory-stoit-li", "Моторизированные шторы — стоит ли?"),
+        ("blog-shtory-dlya-arendnoj-kvartiry-dubai", "Шторы для арендной квартиры"),
+    ],
+    "zhalyuzi-dubai": [
+        ("blog-kak-vybrat-shtory-dubai", "Как выбрать шторы в Дубае"),
+        ("blog-shtory-dlya-arendnoj-kvartiry-dubai", "Шторы для арендной квартиры"),
+    ],
+    "karnizy-dubai": [
+        ("blog-motorizirovannye-shtory-stoit-li", "Моторизированные шторы — стоит ли?"),
+        ("blog-kak-vybrat-shtory-dubai", "Как выбрать шторы в Дубае"),
+    ],
+}
+
+# Blog → related product pages (for cross-linking)
+BLOG_PRODUCT_RELATED = {
+    "blog-kak-vybrat-shtory-dubai": [
+        ("blackout-shtory-dubai", "Блэкаут шторы"),
+        ("tyul-na-zakaz-dubai", "Тюль на заказ"),
+        ("zhalyuzi-dubai", "Жалюзи"),
+    ],
+    "blog-blackout-shtory-plyusy-minusy": [
+        ("blackout-shtory-dubai", "Блэкаут шторы"),
+        ("motorizirovannye-shtory-dubai", "Моторизированные шторы"),
+    ],
+    "blog-motorizirovannye-shtory-stoit-li": [
+        ("motorizirovannye-shtory-dubai", "Моторизированные шторы"),
+        ("karnizy-dubai", "Карнизы"),
+    ],
+    "blog-ukhod-za-shtorami-oae": [
+        ("tyul-na-zakaz-dubai", "Тюль на заказ"),
+        ("blackout-shtory-dubai", "Блэкаут шторы"),
+    ],
+    "blog-shtory-dlya-arendnoj-kvartiry-dubai": [
+        ("zhalyuzi-dubai", "Жалюзи"),
+        ("blackout-shtory-dubai", "Блэкаут шторы"),
+        ("tyul-na-zakaz-dubai", "Тюль на заказ"),
+    ],
+}
+
 
 def build_nav_links_html(current_slug):
     """Build the list of navigation links, excluding the current page."""
@@ -1268,6 +1318,32 @@ def build_blog_cross_links(current_slug):
     return "\n".join(links)
 
 
+def build_related_blog_links(product_slug):
+    """Build links to related blog articles for a product page."""
+    articles = PRODUCT_BLOG_RELATED.get(product_slug, [])
+    if not articles:
+        return ""
+    links = []
+    for slug, label in articles:
+        links.append(
+            f'          <li><a href="{slug}.html">{escape(label)}</a></li>'
+        )
+    return "\n".join(links)
+
+
+def build_related_product_links(blog_slug):
+    """Build links to related product pages for a blog article."""
+    products = BLOG_PRODUCT_RELATED.get(blog_slug, [])
+    if not products:
+        return ""
+    links = []
+    for slug, label in products:
+        links.append(
+            f'          <li><a href="{slug}.html">{escape(label)}</a></li>'
+        )
+    return "\n".join(links)
+
+
 def build_footer_html():
     """Build the shared footer HTML used by both product and blog pages."""
     blog_links = "\n".join(
@@ -1321,6 +1397,7 @@ def generate_blog_article(article):
     faq_html = build_faq_html(article["faq"])
     faq_schema = build_faq_schema(article["faq"])
     cross_links = build_blog_cross_links(article["slug"])
+    related_product_links = build_related_product_links(article["slug"])
     footer_html = build_footer_html()
 
     html = f"""<!DOCTYPE html>
@@ -1740,6 +1817,16 @@ def generate_blog_article(article):
     </div>
   </section>
 
+  <!-- Related products -->
+  <section class="lp-related" style="padding-top:0;">
+    <div class="lp-related__inner">
+      <h2>Наши услуги</h2>
+      <ul>
+{related_product_links}
+      </ul>
+    </div>
+  </section>
+
 {footer_html}
 
   <!-- Meta Pixel Code -->
@@ -1821,6 +1908,7 @@ def generate_page(page):
     breadcrumb_schema = build_breadcrumb_schema(page)
     content_html = build_content_html(page["content_paragraphs"])
     cross_links = build_cross_links(page["slug"])
+    related_blog_links = build_related_blog_links(page["slug"])
     footer_html = build_footer_html()
 
     html = f"""<!DOCTYPE html>
@@ -2279,6 +2367,16 @@ def generate_page(page):
       <h2>Другие услуги</h2>
       <ul>
 {cross_links}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Related blog articles -->
+  <section class="lp-related" style="padding-top:0;">
+    <div class="lp-related__inner">
+      <h2>Полезные статьи</h2>
+      <ul>
+{related_blog_links}
       </ul>
     </div>
   </section>
