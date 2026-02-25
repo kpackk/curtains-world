@@ -21,28 +21,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Генерируемые страницы (семантический HTML) — `generate_pages.py`:**
 - 5 продуктовых лендингов: `blackout-shtory-dubai.html`, `tyul-na-zakaz-dubai.html`, `karnizy-dubai.html`, `motorizirovannye-shtory-dubai.html`, `zhalyuzi-dubai.html`
-- 5 блог-статей: `blog-kak-vybrat-shtory-dubai.html`, `blog-blackout-shtory-plyusy-minusy.html`, `blog-motorizirovannye-shtory-stoit-li.html`, `blog-ukhod-za-shtorami-oae.html`, `blog-shtory-dlya-arendnoj-kvartiry-dubai.html`
+- 8 блог-статей: `blog-kak-vybrat-shtory-dubai.html`, `blog-blackout-shtory-plyusy-minusy.html`, `blog-motorizirovannye-shtory-stoit-li.html`, `blog-ukhod-za-shtorami-oae.html`, `blog-shtory-dlya-arendnoj-kvartiry-dubai.html`, `blog-zhalyuzi-ili-shtory-dubai.html`, `blog-karnizy-tipy-i-vybor.html`, `blog-shtory-dlya-panoramnykh-okon.html`
 - 1 индексная страница блога: `blog.html` (карточки статей, CollectionPage schema)
-- Всего 11 страниц. Не зависят от Tilda CSS/JS — свои встроенные стили
+- Всего 14 страниц. Не зависят от Tilda CSS/JS — свои встроенные стили
 - Перегенерация: `python3 generate_pages.py`
 
 **Служебные страницы:**
 - `index.html` — meta refresh редирект на `home.html`
-- `404.html` — страница ошибки (тёмная тема, кнопка на главную с абсолютным путём `/home.html`)
+- `404.html` — страница ошибки (тёмная тема, кнопка на главную с относительным путём `home.html`)
 
-### Генератор страниц (generate_pages.py, ~2950 строк)
+### Генератор страниц (generate_pages.py)
 
 Центральный скрипт проекта. Структура:
-1. **Константы** (BASE_URL, PHONE, WA_LINK, EMAIL) — строки 22-35
-2. **LANDING_PAGES** — конфиг 5 продуктовых страниц (title, desc, keywords, FAQ, контент) — строки 37-400
-3. **BLOG_ARTICLES** — конфиг 5 блог-статей (h1, content_sections с h2/h3, FAQ) — строки 408-1097
+1. **Константы** (BASE_URL, PHONE, WA_LINK, EMAIL)
+2. **LANDING_PAGES** — конфиг 5 продуктовых страниц (title, desc, keywords, FAQ, контент)
+3. **BLOG_ARTICLES** — конфиг 8 блог-статей (h1, content_sections с h2/h3, FAQ)
 4. **Маппинги перелинковки:**
    - `ALL_LANDING_PAGES`, `ALL_BLOG_ARTICLES` — полные списки slug→label
    - `PRODUCT_BLOG_RELATED` — какие блог-статьи показывать на продуктовой странице
    - `BLOG_PRODUCT_RELATED` — какие продукты показывать на блог-странице
 5. **Builder-функции** — `build_nav_links_html()`, `build_faq_html()`, `build_cross_links()`, `build_related_blog_links()`, `build_related_product_links()`, `build_footer_html()`
 6. **Шаблоны** — `generate_blog_article()`, `generate_page()`, `generate_blog_index()` — полный HTML с inline CSS, аналитикой, schema
-7. **main()** — генерирует все 11 файлов
+7. **main()** — генерирует все 14 файлов
+
+**При добавлении нового блога** нужно обновить 4 места: `BLOG_ARTICLES`, `ALL_BLOG_ARTICLES`, `PRODUCT_BLOG_RELATED`, `BLOG_PRODUCT_RELATED`, а также `sitemap.xml`.
 
 Продуктовые страницы: BreadcrumbList + FAQPage + LocalBusiness + AggregateRating schema
 Блог-статьи: BreadcrumbList (3 уровня) + Article + FAQPage schema
@@ -52,24 +54,25 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - Продуктовые страницы: секция «Другие услуги» (4 продукта) + «Полезные статьи» (2 блога)
 - Блог-статьи: секция «Читайте также» (4 статьи) + «Наши услуги» (2-3 продукта)
-- Footer на всех сгенерированных страницах: полный каталог + все 5 блог-статей
+- Footer на всех сгенерированных страницах: полный каталог + все блог-статьи
 - home.html: кнопка «Блог» → первая блог-статья
 
 ### Аналитика и трекинг
 
-На всех сгенерированных страницах (product + blog):
-- **GTM:** GTM-W7SR8MSV
-- **Yandex.Metrika:** 96561300
-- **Facebook Pixel:** 315622264851387
-- **Web Vitals → GTM:** LCP, CLS отправляются в dataLayer
-- **Event tracking:** `whatsapp_click`, `phone_click`, `cta_click`
+На сгенерированных страницах (product + blog):
+- **Yandex.Metrika:** 96561300 (единственный счётчик аналитики)
+- **Event tracking через Метрику:** `whatsapp_click`, `phone_click` (reachGoal)
 - **UTM capture:** sessionStorage для utm_source/medium/campaign/term/content
+
+На home.html: Yandex.Metrika 96561300 (напрямую).
+
+GTM и Facebook Pixel **удалены** — GTM-контейнер GTM-W7SR8MSV управлялся с недоступного аккаунта и загружал неиспользуемые теги (Google Ads, Pinterest).
 
 ### Python-утилиты
 
 | Скрипт | Назначение |
 |--------|-----------|
-| `generate_pages.py` | Генерирует 11 страниц (5 продуктов + 5 блогов + 1 индекс) |
+| `generate_pages.py` | Генерирует 14 страниц (5 продуктов + 8 блогов + 1 индекс) |
 | `optimize_images.py` | Конвертирует PNG/JPG → WebP через Pillow (качество 80) |
 | `clone_page.py` | Клонирует страницу, скачивает ассеты |
 | `download_fonts.py` | Скачивает Google Fonts (Ubuntu, Montserrat) → `assets/fonts/` |
@@ -84,7 +87,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `images/` (21 файл) — только WebP
 - Корень `assets/` — 20 WebP-изображений, 14 JS-скриптов, 9 CSS-файлов (legacy, используются в home.html)
 
-**SEO:** `robots.txt`, `sitemap.xml` (12 URL), Schema.org JSON-LD на каждой странице, `favicon.ico` + `apple-touch-icon.png`
+**SEO:** `robots.txt`, `sitemap.xml` (15 URL), Schema.org JSON-LD на каждой странице, `favicon.ico` + `apple-touch-icon.png`
 
 ## Commands
 
@@ -112,8 +115,14 @@ npx lighthouse https://kpackk.github.io/curtains-world/home.html --output=json -
 - Деплой: `git push origin master` — GitHub Pages автоматически публикует из корня ветки `master`
 - `.nojekyll` в корне — отключает Jekyll. Без этого файлы с `_` в имени отдают 404
 - Файлы изображений переименованы с `_2024-*` → `img_2024-*` из-за Jekyll-ограничения
-- Preconnect: googletagmanager.com, mc.yandex.ru, connect.facebook.net добавлены в `<head>`
+- Preconnect: `mc.yandex.ru` добавлен в `<head>` на home.html
 - `tilda-forms-1.0.min.css` загружается асинхронно через `media="print" onload` на сгенерированных страницах
+
+## Lighthouse scores (сгенерированные страницы, февраль 2025)
+
+Performance 95 | Accessibility 100 | Best Practices 79 | SEO 100
+
+Best Practices 79 — единственная причина: third-party cookies Яндекс.Метрики (неустранимо).
 
 ## Tilda-специфичные паттерны
 
