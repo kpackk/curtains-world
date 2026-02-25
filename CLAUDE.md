@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Статический сайт «Curtains World» — шторы на заказ в Дубае (домен: curtainsfactory.ae). Клон Tilda-сайта, полностью локализованный для автономного хостинга. Ноль внешних CDN-зависимостей — все ассеты (JS, CSS, шрифты, изображения) скачаны локально. Все изображения в формате WebP. Единственная внешняя зависимость — виджет калькулятора ucalc.pro (загружается по scroll).
 
-**Хостинг:** GitHub Pages — https://kpackk.github.io/curtains-world/
+**Хостинг:** GitHub Pages — https://kpackk.github.io/curtains-world/ (ветка `master`, `.nojekyll` отключает Jekyll)
 **Репозиторий:** https://github.com/kpackk/curtains-world
 
 ## Architecture
@@ -44,9 +44,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 `assets/` содержит как организованные подпапки, так и файлы в корне (legacy от clone_page.py):
 - `css/` (11 файлов) — Tilda CSS + `fonts.css`
 - `js/` (15 файлов) — jQuery 1.10.2, HammerJS, модули Tilda, tilda-phone-mask
-- `fonts/` (11 woff2) — Ubuntu и Montserrat (кириллические подмножества предзагружаются через preload)
+- `fonts/` (17 woff2) — Ubuntu (300, 400, 500, 700) и Montserrat (100-900 variable). Кириллические подмножества предзагружаются через `<link rel="preload">`
 - `images/` (21 файл) — только WebP
-- Корень `assets/` — 20 WebP-изображений и 14 JS-скриптов (legacy, используются в home.html напрямую)
+- Корень `assets/` — 20 WebP-изображений, 14 JS-скриптов, 9 CSS-файлов (legacy от clone_page.py, используются в home.html напрямую)
 
 **Конфигурации:** `assets_mapping.json` (URL → локальный файл), `assets_to_download.json` (манифест для clone_page.py)
 
@@ -75,6 +75,13 @@ python3 download_fonts.py
 ```
 
 Сборки, тестов и линтинга нет — проект полностью статический.
+
+## GitHub Pages
+
+- Деплой: `git push origin master` — GitHub Pages автоматически публикует из корня ветки `master`
+- `.nojekyll` в корне — отключает Jekyll. Без этого файлы с `_` в имени отдают 404
+- Файлы изображений переименованы с `_2024-*` → `img_2024-*` из-за Jekyll-ограничения
+- Preconnect: googletagmanager.com, mc.yandex.ru, connect.facebook.net добавлены в `<head>`
 
 ## Tilda-специфичные паттерны
 
@@ -112,7 +119,7 @@ open(p,'w').write(c)
 
 ### Прочее
 - Lazy-loading: `data-original` вместо `src` для изображений
-- Страничные стили привязаны к ID страниц Tilda (`tilda-blocks-page61146805.min.css`)
+- Страничные стили привязаны к ID страниц Tilda (`tilda-blocks-page61146805.min.css` в `assets/`)
 - Калькулятор: ucalc.pro виджет (ID 451257) в блоке `rec849367592`
 - Аналитика: Google Tag Manager (GTM-W7SR8MSV), Yandex.Metrika (96561300)
 - WhatsApp номер: +971 58 940 8100 (используется в формах и плавающей кнопке)
