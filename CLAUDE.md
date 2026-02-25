@@ -11,46 +11,80 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Architecture
 
-### Два типа страниц
+### Три типа страниц
 
 **Tilda-страница (home.html):**
 - `home.html` — основная русская версия (~650 строк, строки длинные — 50-100KB каждая, общий размер ~370KB)
 - Построена на Tilda-фреймворке: абсолютное позиционирование (T396), div-блоки с ID `recXXXXXX`
 - Зависит от Tilda CSS/JS из `assets/css/` и `assets/js/`
-- Schema.org JSON-LD: `HomeAndConstructionBusiness`
+- Schema.org JSON-LD: `HomeAndConstructionBusiness`, `LocalBusiness`, `FAQPage`, `ItemList`, `BreadcrumbList`
 
-**Генерируемые продуктовые страницы (семантический HTML):**
-- `blackout-shtory-dubai.html`, `tyul-na-zakaz-dubai.html`, `karnizy-dubai.html`, `motorizirovannye-shtory-dubai.html`, `zhalyuzi-dubai.html`
-- Создаются скриптом `generate_pages.py` — семантический HTML, `<details>` для FAQ, BreadcrumbList schema
-- Не зависят от Tilda CSS/JS — свои встроенные стили
+**Генерируемые страницы (семантический HTML) — `generate_pages.py`:**
+- 5 продуктовых лендингов: `blackout-shtory-dubai.html`, `tyul-na-zakaz-dubai.html`, `karnizy-dubai.html`, `motorizirovannye-shtory-dubai.html`, `zhalyuzi-dubai.html`
+- 5 блог-статей: `blog-kak-vybrat-shtory-dubai.html`, `blog-blackout-shtory-plyusy-minusy.html`, `blog-motorizirovannye-shtory-stoit-li.html`, `blog-ukhod-za-shtorami-oae.html`, `blog-shtory-dlya-arendnoj-kvartiry-dubai.html`
+- 1 индексная страница блога: `blog.html` (карточки статей, CollectionPage schema)
+- Всего 11 страниц. Не зависят от Tilda CSS/JS — свои встроенные стили
 - Перегенерация: `python3 generate_pages.py`
 
 **Служебные страницы:**
 - `index.html` — meta refresh редирект на `home.html`
-- `404.html` — страница ошибки (тёмная тема, шрифты Ubuntu/Montserrat, кнопка на главную)
+- `404.html` — страница ошибки (тёмная тема, кнопка на главную с абсолютным путём `/home.html`)
+
+### Генератор страниц (generate_pages.py, ~2950 строк)
+
+Центральный скрипт проекта. Структура:
+1. **Константы** (BASE_URL, PHONE, WA_LINK, EMAIL) — строки 22-35
+2. **LANDING_PAGES** — конфиг 5 продуктовых страниц (title, desc, keywords, FAQ, контент) — строки 37-400
+3. **BLOG_ARTICLES** — конфиг 5 блог-статей (h1, content_sections с h2/h3, FAQ) — строки 408-1097
+4. **Маппинги перелинковки:**
+   - `ALL_LANDING_PAGES`, `ALL_BLOG_ARTICLES` — полные списки slug→label
+   - `PRODUCT_BLOG_RELATED` — какие блог-статьи показывать на продуктовой странице
+   - `BLOG_PRODUCT_RELATED` — какие продукты показывать на блог-странице
+5. **Builder-функции** — `build_nav_links_html()`, `build_faq_html()`, `build_cross_links()`, `build_related_blog_links()`, `build_related_product_links()`, `build_footer_html()`
+6. **Шаблоны** — `generate_blog_article()`, `generate_page()`, `generate_blog_index()` — полный HTML с inline CSS, аналитикой, schema
+7. **main()** — генерирует все 11 файлов
+
+Продуктовые страницы: BreadcrumbList + FAQPage + LocalBusiness + AggregateRating schema
+Блог-статьи: BreadcrumbList (3 уровня) + Article + FAQPage schema
+Блог-индекс: BreadcrumbList + CollectionPage schema
+
+### Перелинковка
+
+- Продуктовые страницы: секция «Другие услуги» (4 продукта) + «Полезные статьи» (2 блога)
+- Блог-статьи: секция «Читайте также» (4 статьи) + «Наши услуги» (2-3 продукта)
+- Footer на всех сгенерированных страницах: полный каталог + все 5 блог-статей
+- home.html: кнопка «Блог» → первая блог-статья
+
+### Аналитика и трекинг
+
+На всех сгенерированных страницах (product + blog):
+- **GTM:** GTM-W7SR8MSV
+- **Yandex.Metrika:** 96561300
+- **Facebook Pixel:** 315622264851387
+- **Web Vitals → GTM:** LCP, CLS отправляются в dataLayer
+- **Event tracking:** `whatsapp_click`, `phone_click`, `cta_click`
+- **UTM capture:** sessionStorage для utm_source/medium/campaign/term/content
 
 ### Python-утилиты
 
 | Скрипт | Назначение |
 |--------|-----------|
-| `generate_pages.py` | Генерирует 5 продуктовых лендингов с schema, аналитикой, навигацией |
-| `optimize_images.py` | Конвертирует PNG/JPG → WebP через Pillow (качество 80, экономия ~90%) |
-| `clone_page.py` | Клонирует страницу с curtainsfactory.ae, скачивает ассеты |
+| `generate_pages.py` | Генерирует 11 страниц (5 продуктов + 5 блогов + 1 индекс) |
+| `optimize_images.py` | Конвертирует PNG/JPG → WebP через Pillow (качество 80) |
+| `clone_page.py` | Клонирует страницу, скачивает ассеты |
 | `download_fonts.py` | Скачивает Google Fonts (Ubuntu, Montserrat) → `assets/fonts/` |
-| `fix_images.py` | Переcкачивает изображения с Tilda CDN, исправляет lazy-loading |
+| `fix_images.py` | Перескачивает изображения с Tilda CDN, исправляет lazy-loading |
 
 ### Ассеты
 
 `assets/` содержит как организованные подпапки, так и файлы в корне (legacy от clone_page.py):
 - `css/` (11 файлов) — Tilda CSS + `fonts.css`
-- `js/` (15 файлов) — jQuery 1.10.2, HammerJS, модули Tilda, tilda-phone-mask
-- `fonts/` (17 woff2) — Ubuntu (300, 400, 500, 700) и Montserrat (100-900 variable). Кириллические подмножества предзагружаются через `<link rel="preload">`
+- `js/` (15 файлов) — jQuery 1.10.2 (defer), HammerJS, модули Tilda, tilda-phone-mask
+- `fonts/` (17 woff2) — Ubuntu (300, 400, 500, 700) и Montserrat (100-900 variable). Все `@font-face` имеют `font-display: swap`
 - `images/` (21 файл) — только WebP
-- Корень `assets/` — 20 WebP-изображений, 14 JS-скриптов, 9 CSS-файлов (legacy от clone_page.py, используются в home.html напрямую)
+- Корень `assets/` — 20 WebP-изображений, 14 JS-скриптов, 9 CSS-файлов (legacy, используются в home.html)
 
-**Конфигурации:** `assets_mapping.json` (URL → локальный файл), `assets_to_download.json` (манифест для clone_page.py)
-
-**SEO:** `robots.txt`, `sitemap.xml` (все 6 страниц), Schema.org JSON-LD в каждой странице, `favicon.ico` + `apple-touch-icon.png` (180x180)
+**SEO:** `robots.txt`, `sitemap.xml` (12 URL), Schema.org JSON-LD на каждой странице, `favicon.ico` + `apple-touch-icon.png`
 
 ## Commands
 
@@ -61,17 +95,14 @@ python3 -m http.server 8888
 # Публичный туннель для тестирования на телефоне
 ssh -R 80:localhost:8888 -o ServerAliveInterval=30 serveo.net
 
-# Перегенерировать продуктовые страницы после изменений в generate_pages.py
+# Перегенерировать все страницы после изменений в generate_pages.py
 python3 generate_pages.py
 
 # Конвертировать изображения в WebP (требует: pip3 install Pillow)
 python3 optimize_images.py
 
-# Клонировать страницу и скачать все ассеты
-python3 clone_page.py
-
-# Скачать шрифты
-python3 download_fonts.py
+# Lighthouse-аудит (npx, без глобальной установки)
+npx lighthouse https://kpackk.github.io/curtains-world/home.html --output=json --chrome-flags="--headless --no-sandbox" --only-categories=performance,accessibility,best-practices,seo
 ```
 
 Сборки, тестов и линтинга нет — проект полностью статический.
@@ -82,6 +113,7 @@ python3 download_fonts.py
 - `.nojekyll` в корне — отключает Jekyll. Без этого файлы с `_` в имени отдают 404
 - Файлы изображений переименованы с `_2024-*` → `img_2024-*` из-за Jekyll-ограничения
 - Preconnect: googletagmanager.com, mc.yandex.ru, connect.facebook.net добавлены в `<head>`
+- `tilda-forms-1.0.min.css` загружается асинхронно через `media="print" onload` на сгенерированных страницах
 
 ## Tilda-специфичные паттерны
 
@@ -121,5 +153,4 @@ open(p,'w').write(c)
 - Lazy-loading: `data-original` вместо `src` для изображений
 - Страничные стили привязаны к ID страниц Tilda (`tilda-blocks-page61146805.min.css` в `assets/`)
 - Калькулятор: ucalc.pro виджет (ID 451257) в блоке `rec849367592`
-- Аналитика: Google Tag Manager (GTM-W7SR8MSV), Yandex.Metrika (96561300)
 - WhatsApp номер: +971 58 940 8100 (используется в формах и плавающей кнопке)
