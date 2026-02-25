@@ -1438,7 +1438,7 @@ def generate_blog_article(article):
 
   <!-- Verification -->
 
-  <meta name="yandex-verification" content="ce618f2e30367a5c">
+
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -1448,7 +1448,7 @@ def generate_blog_article(article):
   <!-- CSS -->
   <link href="assets/tilda-grid-3.0.min.css" rel="stylesheet">
   <link href="assets/fonts.css" rel="stylesheet">
-  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet">
+  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- Structured Data: BreadcrumbList -->
   <script type="application/ld+json">
@@ -1948,7 +1948,7 @@ def generate_page(page):
 
   <!-- Verification -->
 
-  <meta name="yandex-verification" content="ce618f2e30367a5c">
+
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -1958,7 +1958,7 @@ def generate_page(page):
   <!-- CSS -->
   <link href="assets/tilda-grid-3.0.min.css" rel="stylesheet">
   <link href="assets/fonts.css" rel="stylesheet">
-  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet">
+  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- Structured Data: BreadcrumbList -->
   <script type="application/ld+json">
@@ -2539,7 +2539,7 @@ def generate_blog_index():
 
   <!-- Verification -->
 
-  <meta name="yandex-verification" content="ce618f2e30367a5c">
+
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -2549,7 +2549,7 @@ def generate_blog_index():
   <!-- CSS -->
   <link href="assets/tilda-grid-3.0.min.css" rel="stylesheet">
   <link href="assets/fonts.css" rel="stylesheet">
-  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet">
+  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- Structured Data: BreadcrumbList -->
   <script type="application/ld+json">
