@@ -1437,7 +1437,7 @@ def generate_blog_article(article):
   <meta name="ICBM" content="25.2048, 55.2708">
 
   <!-- Verification -->
-  <meta name="google-site-verification" content="gcDZYvtJ9pRFV-k5aVdlqdMJv5F6ZQyn_srlvuIBJck">
+
   <meta name="yandex-verification" content="ce618f2e30367a5c">
 
   <!-- Favicon -->
@@ -1947,7 +1947,7 @@ def generate_page(page):
   <meta name="ICBM" content="25.2048, 55.2708">
 
   <!-- Verification -->
-  <meta name="google-site-verification" content="gcDZYvtJ9pRFV-k5aVdlqdMJv5F6ZQyn_srlvuIBJck">
+
   <meta name="yandex-verification" content="ce618f2e30367a5c">
 
   <!-- Favicon -->
@@ -2538,7 +2538,7 @@ def generate_blog_index():
   <meta name="ICBM" content="25.2048, 55.2708">
 
   <!-- Verification -->
-  <meta name="google-site-verification" content="gcDZYvtJ9pRFV-k5aVdlqdMJv5F6ZQyn_srlvuIBJck">
+
   <meta name="yandex-verification" content="ce618f2e30367a5c">
 
   <!-- Favicon -->
