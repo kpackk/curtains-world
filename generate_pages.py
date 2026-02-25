@@ -10,7 +10,7 @@ semantic HTML files using a shared template. Each page includes:
 - FAQ section with FAQPage schema
 - BreadcrumbList schema
 - Footer with contacts
-- Analytics: GTM, Yandex.Metrika
+- Analytics: Yandex.Metrika
 - WhatsApp floating button
 """
 
@@ -1922,15 +1922,6 @@ def generate_blog_article(article):
 {faq_schema}
   </script>
 
-  <!-- Google Tag Manager -->
-  <script>
-  (function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
-  new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  }})(window,document,'script','dataLayer','GTM-W7SR8MSV');
-  </script>
-
   <!-- Yandex.Metrika -->
   <script>
   (function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};
@@ -2201,9 +2192,6 @@ def generate_blog_article(article):
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7SR8MSV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
   <!-- Header -->
   <header class="lp-header">
     <div class="lp-header__inner">
@@ -2287,28 +2275,16 @@ def generate_blog_article(article):
 
 {footer_html}
 
-  <!-- Web Vitals → GTM -->
-  <script>
-  if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
-  </script>
-
   <!-- Event Tracking -->
   <script>
   document.addEventListener('DOMContentLoaded',function(){{
     var waBtn=document.querySelector('.wa-float');
     if(waBtn)waBtn.addEventListener('click',function(){{
-      if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
       if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
     }});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
       el.addEventListener('click',function(){{
-        if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
         if(window.ym)ym(96561300,'reachGoal','phone_click');
-      }});
-    }});
-    document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
-      el.addEventListener('click',function(){{
-        if(window.dataLayer)dataLayer.push({{event:'cta_click',cta_text:el.textContent.trim()}});
       }});
     }});
   }});
@@ -2328,9 +2304,6 @@ def generate_blog_article(article):
     utms.forEach(function(k){{var v=p.get(k);if(v)d[k]=v;}});
     if(Object.keys(d).length>0){{
       try{{sessionStorage.setItem('utms',JSON.stringify(d));}}catch(e){{}}
-      if(window.dataLayer){{d.event='utm_captured';dataLayer.push(d);}}
-    }}else{{
-      try{{var s=sessionStorage.getItem('utms');if(s){{d=JSON.parse(s);d.event='utm_restored';if(window.dataLayer)dataLayer.push(d);}}}}catch(e){{}}
     }}
   }})();
   </script>
@@ -2441,15 +2414,6 @@ def generate_page(page):
     "ratingCount": "50"
   }}
 }}
-  </script>
-
-  <!-- Google Tag Manager -->
-  <script>
-  (function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
-  new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  }})(window,document,'script','dataLayer','GTM-W7SR8MSV');
   </script>
 
   <!-- Yandex.Metrika -->
@@ -2736,9 +2700,6 @@ def generate_page(page):
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7SR8MSV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
   <!-- Header -->
   <header class="lp-header">
     <div class="lp-header__inner">
@@ -2824,28 +2785,16 @@ def generate_page(page):
 
 {footer_html}
 
-  <!-- Web Vitals → GTM -->
-  <script>
-  if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
-  </script>
-
   <!-- Event Tracking -->
   <script>
   document.addEventListener('DOMContentLoaded',function(){{
     var waBtn=document.querySelector('.wa-float');
     if(waBtn)waBtn.addEventListener('click',function(){{
-      if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
       if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
     }});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
       el.addEventListener('click',function(){{
-        if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
         if(window.ym)ym(96561300,'reachGoal','phone_click');
-      }});
-    }});
-    document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
-      el.addEventListener('click',function(){{
-        if(window.dataLayer)dataLayer.push({{event:'cta_click',cta_text:el.textContent.trim()}});
       }});
     }});
   }});
@@ -2865,9 +2814,6 @@ def generate_page(page):
     utms.forEach(function(k){{var v=p.get(k);if(v)d[k]=v;}});
     if(Object.keys(d).length>0){{
       try{{sessionStorage.setItem('utms',JSON.stringify(d));}}catch(e){{}}
-      if(window.dataLayer){{d.event='utm_captured';dataLayer.push(d);}}
-    }}else{{
-      try{{var s=sessionStorage.getItem('utms');if(s){{d=JSON.parse(s);d.event='utm_restored';if(window.dataLayer)dataLayer.push(d);}}}}catch(e){{}}
     }}
   }})();
   </script>
@@ -2982,15 +2928,6 @@ def generate_blog_index():
   <!-- Structured Data: CollectionPage -->
   <script type="application/ld+json">
 {collection_schema}
-  </script>
-
-  <!-- Google Tag Manager -->
-  <script>
-  (function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
-  new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  }})(window,document,'script','dataLayer','GTM-W7SR8MSV');
   </script>
 
   <!-- Yandex.Metrika -->
@@ -3218,9 +3155,6 @@ def generate_blog_index():
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7SR8MSV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
   <!-- Header -->
   <header class="lp-header">
     <div class="lp-header__inner">
@@ -3276,28 +3210,16 @@ def generate_blog_index():
 
 {footer_html}
 
-  <!-- Web Vitals → GTM -->
-  <script>
-  if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
-  </script>
-
   <!-- Event Tracking -->
   <script>
   document.addEventListener('DOMContentLoaded',function(){{
     var waBtn=document.querySelector('.wa-float');
     if(waBtn)waBtn.addEventListener('click',function(){{
-      if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
       if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
     }});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
       el.addEventListener('click',function(){{
-        if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
         if(window.ym)ym(96561300,'reachGoal','phone_click');
-      }});
-    }});
-    document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
-      el.addEventListener('click',function(){{
-        if(window.dataLayer)dataLayer.push({{event:'cta_click',cta_text:el.textContent.trim()}});
       }});
     }});
   }});
@@ -3317,9 +3239,6 @@ def generate_blog_index():
     utms.forEach(function(k){{var v=p.get(k);if(v)d[k]=v;}});
     if(Object.keys(d).length>0){{
       try{{sessionStorage.setItem('utms',JSON.stringify(d));}}catch(e){{}}
-      if(window.dataLayer){{d.event='utm_captured';dataLayer.push(d);}}
-    }}else{{
-      try{{var s=sessionStorage.getItem('utms');if(s){{d=JSON.parse(s);d.event='utm_restored';if(window.dataLayer)dataLayer.push(d);}}}}catch(e){{}}
     }}
   }})();
   </script>
