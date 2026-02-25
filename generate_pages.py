@@ -21,7 +21,7 @@ from html import escape
 # ---------------------------------------------------------------------------
 # Base URL & shared constants
 # ---------------------------------------------------------------------------
-BASE_URL = "https://curtainsfactory.ae"
+BASE_URL = "https://kpackk.github.io/curtains-world"
 PHONE = "+971 58 940 8100"
 PHONE_LINK = "tel:+971589408100"
 WA_LINK = (
@@ -30,7 +30,7 @@ WA_LINK = (
     "%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C"
     "%20%D0%BF%D1%80%D0%BE%20%D1%88%D1%82%D0%BE%D1%80%D1%8B"
 )
-EMAIL = "hello@curtainsfactory.ae"
+EMAIL = "hello@curtainsfactory.ae"  # TODO: update when own domain is ready
 
 # ---------------------------------------------------------------------------
 # Page definitions

@@ -3,78 +3,78 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/</loc>
-    <xhtml:link rel="alternate" hreflang="ru" href="/" />
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://kpackk.github.io/curtains-world/home.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://kpackk.github.io/curtains-world/home.html" />
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>/assets/img_2024-02-07_14131410.webp</image:loc>
+      <image:loc>https://kpackk.github.io/curtains-world/assets/img_2024-02-07_14131410.webp</image:loc>
       <image:title>Шторы на заказ в Дубае — Curtains World</image:title>
     </image:image>
   </url>
   <url>
-    <loc>/blackout-shtory-dubai.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://kpackk.github.io/curtains-world/blackout-shtory-dubai.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/tyul-na-zakaz-dubai.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://kpackk.github.io/curtains-world/tyul-na-zakaz-dubai.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/karnizy-dubai.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://kpackk.github.io/curtains-world/karnizy-dubai.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/motorizirovannye-shtory-dubai.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://kpackk.github.io/curtains-world/motorizirovannye-shtory-dubai.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/zhalyuzi-dubai.html</loc>
-    <lastmod>2026-02-24</lastmod>
+    <loc>https://kpackk.github.io/curtains-world/zhalyuzi-dubai.html</loc>
+    <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>/blog.html</loc>
+    <loc>https://kpackk.github.io/curtains-world/blog.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>/blog-kak-vybrat-shtory-dubai.html</loc>
+    <loc>https://kpackk.github.io/curtains-world/blog-kak-vybrat-shtory-dubai.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>/blog-blackout-shtory-plyusy-minusy.html</loc>
+    <loc>https://kpackk.github.io/curtains-world/blog-blackout-shtory-plyusy-minusy.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>/blog-motorizirovannye-shtory-stoit-li.html</loc>
+    <loc>https://kpackk.github.io/curtains-world/blog-motorizirovannye-shtory-stoit-li.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>/blog-ukhod-za-shtorami-oae.html</loc>
+    <loc>https://kpackk.github.io/curtains-world/blog-ukhod-za-shtorami-oae.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>/blog-shtory-dlya-arendnoj-kvartiry-dubai.html</loc>
+    <loc>https://kpackk.github.io/curtains-world/blog-shtory-dlya-arendnoj-kvartiry-dubai.html</loc>
     <lastmod>2026-02-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
