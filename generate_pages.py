@@ -1295,6 +1295,7 @@ def build_blog_breadcrumb_schema(article):
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Блог",
+                "item": f"{BASE_URL}/blog",
             },
             {
                 "@type": "ListItem",
@@ -1769,7 +1770,7 @@ def generate_blog_article(article):
   <div class="lp-breadcrumb" aria-label="Хлебные крошки">
     <a href="home.html">Главная</a>
     <span>/</span>
-    Блог
+    <a href="blog.html">Блог</a>
     <span>/</span>
     {escape(article["breadcrumb_name"])}
   </div>
@@ -2453,6 +2454,475 @@ def generate_page(page):
     return html
 
 
+def generate_blog_index():
+    """Generate the blog index page with cards for all blog articles."""
+
+    nav_links = build_nav_links_html("blog")
+    footer_html = build_footer_html()
+
+    # Build article cards
+    cards = []
+    for article in BLOG_ARTICLES:
+        cards.append(f"""      <article class="lp-blog-card">
+        <h2><a href="{article['filename']}">{escape(article['h1'])}</a></h2>
+        <time datetime="{article['date_published']}">{article['date_published']}</time>
+        <p>{escape(article['description'])}</p>
+        <a href="{article['filename']}" class="lp-blog-card__link">Читать далее &rarr;</a>
+      </article>""")
+    cards_html = "\n".join(cards)
+
+    # Schema: BreadcrumbList
+    breadcrumb_schema = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Главная",
+                "item": f"{BASE_URL}/",
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Блог",
+                "item": f"{BASE_URL}/blog",
+            },
+        ],
+    }, ensure_ascii=False, indent=2)
+
+    # Schema: CollectionPage
+    collection_schema = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Блог о шторах в Дубае",
+        "description": (
+            "Полезные статьи о шторах, жалюзи и карнизах в Дубае: "
+            "советы по выбору, уходу и установке."
+        ),
+        "url": f"{BASE_URL}/blog",
+    }, ensure_ascii=False, indent=2)
+
+    html = f"""<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Блог о шторах в Дубае | Curtains World</title>
+  <link rel="canonical" href="{BASE_URL}/blog">
+  <meta name="description" content="Полезные статьи о шторах в Дубае: как выбрать ткань, блэкаут vs тюль, моторизированные шторы, уход и советы для арендных квартир.">
+  <meta name="keywords" content="шторы дубай блог, советы по шторам ОАЭ, выбор штор дубай">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Блог о шторах в Дубае | Curtains World">
+  <meta property="og:description" content="Полезные статьи о шторах в Дубае: как выбрать ткань, блэкаут vs тюль, моторизированные шторы, уход и советы.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Curtains World">
+  <meta property="og:url" content="{BASE_URL}/blog">
+  <meta property="og:image" content="{BASE_URL}/assets/img_2024-02-07_14131410.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/webp">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Блог о шторах в Дубае | Curtains World">
+  <meta name="twitter:description" content="Полезные статьи о шторах в Дубае: как выбрать ткань, блэкаут vs тюль, моторизированные шторы, уход и советы.">
+  <meta name="twitter:image" content="{BASE_URL}/assets/img_2024-02-07_14131410.webp">
+
+  <!-- Geo -->
+  <meta name="geo.region" content="AE-DU">
+  <meta name="geo.placename" content="Dubai">
+  <meta name="geo.position" content="25.2048;55.2708">
+  <meta name="ICBM" content="25.2048, 55.2708">
+
+  <!-- Verification -->
+  <meta name="google-site-verification" content="gcDZYvtJ9pRFV-k5aVdlqdMJv5F6ZQyn_srlvuIBJck">
+  <meta name="yandex-verification" content="ce618f2e30367a5c">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#1a1a2e">
+
+  <!-- CSS -->
+  <link href="assets/tilda-grid-3.0.min.css" rel="stylesheet">
+  <link href="assets/fonts.css" rel="stylesheet">
+  <link href="assets/tilda-forms-1.0.min.css" rel="stylesheet">
+
+  <!-- Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+{breadcrumb_schema}
+  </script>
+
+  <!-- Structured Data: CollectionPage -->
+  <script type="application/ld+json">
+{collection_schema}
+  </script>
+
+  <!-- Google Tag Manager -->
+  <script>
+  (function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
+  new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  }})(window,document,'script','dataLayer','GTM-W7SR8MSV');
+  </script>
+
+  <!-- Yandex.Metrika -->
+  <script>
+  (function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};
+  m[i].l=1*new Date();
+  for(var j=0;j<document.scripts.length;j++){{if(document.scripts[j].src===r){{return;}}}}
+  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+  }})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+  ym(96561300,"init",{{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}});
+  </script>
+  <noscript><div><img alt="" src="https://mc.yandex.ru/watch/96561300" style="position:absolute;left:-9999px;" /></div></noscript>
+
+  <style>
+    /* ===== Reset & Base ===== */
+    *, *::before, *::after {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    html {{ scroll-behavior: smooth; }}
+    body {{
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }}
+    a {{ color: #6e8b74; text-decoration: none; transition: color .2s; }}
+    a:hover {{ color: #4a6b50; }}
+
+    /* ===== Header ===== */
+    .lp-header {{
+      position: sticky; top: 0; z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      padding: 0 20px;
+    }}
+    .lp-header__inner {{
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 64px;
+    }}
+    .lp-header__logo {{
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 22px; font-weight: 700; color: #333;
+    }}
+    .lp-header__logo a {{ color: inherit; }}
+    .lp-header__cta {{
+      display: inline-block;
+      padding: 10px 24px;
+      background: #7a8d7e;
+      color: #fff;
+      border-radius: 5px;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 14px; font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      transition: background .2s;
+    }}
+    .lp-header__cta:hover {{ background: #6e8b74; color: #fff; }}
+
+    /* ===== Navigation ===== */
+    .lp-nav {{ background: #fafaf8; border-bottom: 1px solid #eee; }}
+    .lp-nav__inner {{
+      max-width: 1200px; margin: 0 auto; padding: 0 20px;
+    }}
+    .lp-nav ul {{
+      list-style: none; display: flex; flex-wrap: wrap; gap: 0;
+    }}
+    .lp-nav li a {{
+      display: block; padding: 12px 16px;
+      font-size: 14px; font-weight: 600; color: #333;
+      transition: color .2s, background .2s;
+    }}
+    .lp-nav li a:hover {{ color: #6e8b74; background: #f0ede8; }}
+    .lp-nav li a[aria-current="page"] {{ color: #6e8b74; }}
+
+    /* ===== Hero ===== */
+    .lp-hero {{
+      background: linear-gradient(135deg, #f8f2e9 0%, #e8e0d5 100%);
+      padding: 60px 20px 50px;
+      text-align: center;
+    }}
+    .lp-hero__inner {{ max-width: 800px; margin: 0 auto; }}
+    .lp-hero h1 {{
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 36px; font-weight: 700; color: #333;
+      margin-bottom: 16px; line-height: 1.25;
+    }}
+    .lp-hero__subtitle {{
+      font-size: 18px; color: #555; margin-bottom: 0; line-height: 1.5;
+    }}
+
+    /* ===== Breadcrumb ===== */
+    .lp-breadcrumb {{
+      max-width: 1200px; margin: 0 auto; padding: 16px 20px;
+      font-size: 13px; color: #888;
+    }}
+    .lp-breadcrumb a {{ color: #6e8b74; }}
+    .lp-breadcrumb span {{ margin: 0 6px; }}
+
+    /* ===== Blog Grid ===== */
+    .lp-blog-grid {{
+      max-width: 1200px; margin: 0 auto;
+      padding: 40px 20px 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }}
+    .lp-blog-card {{
+      background: #fff;
+      border: 1px solid #e8e8e8;
+      border-radius: 12px;
+      padding: 28px 24px;
+      transition: box-shadow .2s, transform .15s;
+    }}
+    .lp-blog-card:hover {{
+      box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      transform: translateY(-2px);
+    }}
+    .lp-blog-card h2 {{
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 20px; font-weight: 700; color: #333;
+      margin-bottom: 8px; line-height: 1.3;
+    }}
+    .lp-blog-card h2 a {{ color: inherit; }}
+    .lp-blog-card h2 a:hover {{ color: #6e8b74; }}
+    .lp-blog-card time {{
+      display: block;
+      font-size: 13px; color: #999;
+      margin-bottom: 12px;
+    }}
+    .lp-blog-card p {{
+      font-size: 15px; color: #555; line-height: 1.6;
+      margin-bottom: 16px;
+      font-family: 'Ubuntu', 'Montserrat', Arial, sans-serif;
+    }}
+    .lp-blog-card__link {{
+      font-size: 14px; font-weight: 600;
+      color: #6e8b74;
+    }}
+    .lp-blog-card__link:hover {{ color: #4a6b50; }}
+
+    /* ===== CTA Banner ===== */
+    .lp-cta-banner {{
+      background: #6e8b74; color: #fff;
+      padding: 50px 20px; text-align: center;
+    }}
+    .lp-cta-banner__inner {{ max-width: 700px; margin: 0 auto; }}
+    .lp-cta-banner h2 {{
+      font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #fff;
+    }}
+    .lp-cta-banner p {{
+      font-size: 16px; margin-bottom: 24px; opacity: .9;
+    }}
+    .lp-cta-banner__btn {{
+      display: inline-block;
+      padding: 14px 36px;
+      background: #fff; color: #6e8b74;
+      border-radius: 8px;
+      font-size: 16px; font-weight: 700;
+      transition: background .2s, transform .15s;
+    }}
+    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #5a7a60; transform: translateY(-1px); }}
+
+    /* ===== Footer ===== */
+    .lp-footer {{
+      background: #333; color: #ccc; padding: 40px 20px;
+    }}
+    .lp-footer__inner {{
+      max-width: 1200px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; gap: 40px;
+      justify-content: space-between;
+    }}
+    .lp-footer__col {{ flex: 1; min-width: 200px; }}
+    .lp-footer__col h3 {{
+      font-size: 16px; font-weight: 700; color: #fff;
+      margin-bottom: 12px;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }}
+    .lp-footer__col p, .lp-footer__col a {{
+      font-size: 14px; color: #aaa; line-height: 1.8;
+    }}
+    .lp-footer__col a:hover {{ color: #fff; }}
+    .lp-footer__col ul {{ list-style: none; }}
+    .lp-footer__col ul li a {{
+      display: block; padding: 2px 0;
+      font-size: 14px; color: #aaa;
+    }}
+    .lp-footer__col ul li a:hover {{ color: #fff; }}
+    .lp-footer__bottom {{
+      max-width: 1200px; margin: 24px auto 0;
+      padding-top: 20px; border-top: 1px solid #555;
+      font-size: 13px; color: #777; text-align: center;
+    }}
+
+    /* ===== WhatsApp Button ===== */
+    .wa-float {{
+      position: fixed; bottom: 20px; right: 20px; z-index: 9999;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,.25);
+      cursor: pointer; transition: transform .2s;
+    }}
+    .wa-float:hover {{ transform: scale(1.1); }}
+    .wa-float svg {{ width: 32px; height: 32px; fill: #fff; }}
+
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {{
+      .lp-hero h1 {{ font-size: 28px; }}
+      .lp-hero__subtitle {{ font-size: 16px; }}
+      .lp-cta-banner h2 {{ font-size: 24px; }}
+      .lp-header__cta {{ padding: 8px 16px; font-size: 12px; }}
+      .lp-nav ul {{ flex-direction: column; }}
+      .lp-nav li a {{ padding: 10px 16px; border-bottom: 1px solid #eee; }}
+      .lp-footer__inner {{ flex-direction: column; gap: 24px; }}
+    }}
+    @media (max-width: 480px) {{
+      .lp-hero {{ padding: 40px 16px 36px; }}
+      .lp-hero h1 {{ font-size: 24px; }}
+      .lp-blog-grid {{ padding: 24px 16px 30px; gap: 16px; }}
+      .lp-blog-card {{ padding: 20px 16px; }}
+    }}
+    @media (min-width: 960px) {{
+      .wa-float {{ bottom: 30px; right: 30px; }}
+    }}
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W7SR8MSV" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <!-- Header -->
+  <header class="lp-header">
+    <div class="lp-header__inner">
+      <div class="lp-header__logo"><a href="home.html">Curtains World</a></div>
+      <a href="{WA_LINK}" target="_blank" rel="noopener" class="lp-header__cta">
+        Бесплатный замер
+      </a>
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav class="lp-nav" aria-label="Каталог">
+    <div class="lp-nav__inner">
+      <ul>
+        {nav_links}
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Breadcrumb -->
+  <div class="lp-breadcrumb" aria-label="Хлебные крошки">
+    <a href="home.html">Главная</a>
+    <span>/</span>
+    Блог
+  </div>
+
+  <!-- Hero -->
+  <section class="lp-hero">
+    <div class="lp-hero__inner">
+      <h1>Блог о шторах в Дубае</h1>
+      <p class="lp-hero__subtitle">Полезные статьи о выборе, установке и уходе за шторами в ОАЭ</p>
+    </div>
+  </section>
+
+  <!-- Blog articles grid -->
+  <section class="lp-blog-grid">
+{cards_html}
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="lp-cta-banner">
+    <div class="lp-cta-banner__inner">
+      <h2>Закажите бесплатный замер</h2>
+      <p>Наш специалист приедет в удобное время, снимет размеры и поможет подобрать ткань. Замер, доставка и установка бесплатно.</p>
+      <a href="{WA_LINK}" target="_blank" rel="noopener" class="lp-cta-banner__btn">
+        Написать в WhatsApp
+      </a>
+      <p style="margin-top:16px; margin-bottom:0; font-size:14px;">
+        Или позвоните: <a href="{PHONE_LINK}" style="color:#fff; text-decoration:underline;">{PHONE}</a>
+      </p>
+    </div>
+  </section>
+
+{footer_html}
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)}};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}}(window,document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','315622264851387');
+  fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=315622264851387&ev=PageView&noscript=1" alt="" /></noscript>
+
+  <!-- Web Vitals → GTM -->
+  <script>
+  if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
+  </script>
+
+  <!-- Event Tracking -->
+  <script>
+  document.addEventListener('DOMContentLoaded',function(){{
+    var waBtn=document.querySelector('.wa-float');
+    if(waBtn)waBtn.addEventListener('click',function(){{
+      if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
+      if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
+      if(window.fbq)fbq('track','Contact',{{content_name:'WhatsApp Float'}});
+    }});
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
+      el.addEventListener('click',function(){{
+        if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
+        if(window.ym)ym(96561300,'reachGoal','phone_click');
+        if(window.fbq)fbq('track','Contact',{{content_name:'Phone'}});
+      }});
+    }});
+    document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
+      el.addEventListener('click',function(){{
+        if(window.dataLayer)dataLayer.push({{event:'cta_click',cta_text:el.textContent.trim()}});
+      }});
+    }});
+  }});
+  </script>
+
+  <!-- WhatsApp Float Button -->
+  <a href="{WA_LINK}" target="_blank" rel="noopener" class="wa-float" aria-label="Написать в WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- UTM Capture -->
+  <script>
+  (function(){{
+    var p=new URLSearchParams(window.location.search);
+    var utms=['utm_source','utm_medium','utm_campaign','utm_term','utm_content'];
+    var d={{}};
+    utms.forEach(function(k){{var v=p.get(k);if(v)d[k]=v;}});
+    if(Object.keys(d).length>0){{
+      try{{sessionStorage.setItem('utms',JSON.stringify(d));}}catch(e){{}}
+      if(window.dataLayer){{d.event='utm_captured';dataLayer.push(d);}}
+    }}else{{
+      try{{var s=sessionStorage.getItem('utms');if(s){{d=JSON.parse(s);d.event='utm_restored';if(window.dataLayer)dataLayer.push(d);}}}}catch(e){{}}
+    }}
+  }})();
+  </script>
+</body>
+</html>"""
+
+    return html
+
+
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -2470,8 +2940,15 @@ def main():
             f.write(html)
         print(f"Generated: {article['filename']}")
 
-    total = len(PAGES) + len(BLOG_ARTICLES)
-    print(f"\nDone! Generated {len(PAGES)} landing pages + {len(BLOG_ARTICLES)} blog articles = {total} pages.")
+    # Blog index page
+    blog_html = generate_blog_index()
+    blog_filepath = os.path.join(script_dir, "blog.html")
+    with open(blog_filepath, "w", encoding="utf-8") as f:
+        f.write(blog_html)
+    print("Generated: blog.html")
+
+    total = len(PAGES) + len(BLOG_ARTICLES) + 1
+    print(f"\nDone! Generated {len(PAGES)} landing pages + {len(BLOG_ARTICLES)} blog articles + 1 blog index = {total} pages.")
 
 
 if __name__ == "__main__":
