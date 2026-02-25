@@ -13,14 +13,14 @@
   <meta property="og:description" content="Карнизы для штор в Дубае — потолочные, настенные, электрические. Установка бесплатно. Звоните: +971 58 940 8100">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://curtainsfactory.ae/karnizy-dubai">
-  <meta property="og:image" content="https://curtainsfactory.ae/assets/img_2024-02-07_14131410.webp">
+  <meta property="og:image" content="https://curtainsfactory.ae/assets/_2024-02-07_14131410.png">
   <meta property="og:locale" content="ru_RU">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Карнизы в Дубае | Curtains World">
   <meta name="twitter:description" content="Карнизы для штор в Дубае — потолочные, настенные, электрические. Установка бесплатно. Звоните: +971 58 940 8100">
-  <meta name="twitter:image" content="https://curtainsfactory.ae/assets/img_2024-02-07_14131410.webp">
+  <meta name="twitter:image" content="https://curtainsfactory.ae/assets/_2024-02-07_14131410.png">
 
   <!-- Geo -->
   <meta name="geo.region" content="AE-DU">
@@ -581,6 +581,35 @@
   fbq('track','PageView');
   </script>
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=315622264851387&ev=PageView&noscript=1" alt="" /></noscript>
+
+  <!-- Web Vitals → GTM -->
+  <script>
+  if('PerformanceObserver' in window){function sendToGTM(n,v){if(window.dataLayer){window.dataLayer.push({event:'web_vitals',metric_name:n,metric_value:Math.round(v)})}}try{new PerformanceObserver(function(l){var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}).observe({type:'largest-contentful-paint',buffered:true})}catch(e){}var cls=0;try{new PerformanceObserver(function(l){l.getEntries().forEach(function(e){if(!e.hadRecentInput)cls+=e.value});sendToGTM('CLS',cls*1000)}).observe({type:'layout-shift',buffered:true})}catch(e){}}
+  </script>
+
+  <!-- Event Tracking -->
+  <script>
+  document.addEventListener('DOMContentLoaded',function(){
+    var waBtn=document.querySelector('.wa-float');
+    if(waBtn)waBtn.addEventListener('click',function(){
+      if(window.dataLayer)dataLayer.push({event:'whatsapp_click',click_source:'float_button'});
+      if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
+      if(window.fbq)fbq('track','Contact',{content_name:'WhatsApp Float'});
+    });
+    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){
+      el.addEventListener('click',function(){
+        if(window.dataLayer)dataLayer.push({event:'phone_click'});
+        if(window.ym)ym(96561300,'reachGoal','phone_click');
+        if(window.fbq)fbq('track','Contact',{content_name:'Phone'});
+      });
+    });
+    document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){
+      el.addEventListener('click',function(){
+        if(window.dataLayer)dataLayer.push({event:'cta_click',cta_text:el.textContent.trim()});
+      });
+    });
+  });
+  </script>
 
   <!-- WhatsApp Float Button -->
   <a href="https://wa.me/971589408100?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D1%80%D0%BE%20%D1%88%D1%82%D0%BE%D1%80%D1%8B" target="_blank" rel="noopener" class="wa-float" aria-label="Написать в WhatsApp">
