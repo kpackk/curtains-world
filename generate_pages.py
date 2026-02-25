@@ -1953,8 +1953,8 @@ def generate_blog_article(article):
       background: #fff;
       -webkit-font-smoothing: antialiased;
     }}
-    a {{ color: #6e8b74; text-decoration: none; transition: color .2s; }}
-    a:hover {{ color: #4a6b50; }}
+    a {{ color: #4e7a55; text-decoration: none; transition: color .2s; }}
+    a:hover {{ color: #3a5f40; }}
     img {{ max-width: 100%; height: auto; }}
 
     /* ===== Header ===== */
@@ -1977,7 +1977,7 @@ def generate_blog_article(article):
     .lp-header__cta {{
       display: inline-block;
       padding: 10px 24px;
-      background: #7a8d7e;
+      background: #536b58;
       color: #fff;
       border-radius: 5px;
       font-family: 'Montserrat', Arial, sans-serif;
@@ -1986,7 +1986,7 @@ def generate_blog_article(article):
       letter-spacing: 0.02em;
       transition: background .2s;
     }}
-    .lp-header__cta:hover {{ background: #6e8b74; color: #fff; }}
+    .lp-header__cta:hover {{ background: #4e7a55; color: #fff; }}
 
     /* ===== Navigation ===== */
     .lp-nav {{ background: #fafaf8; border-bottom: 1px solid #eee; }}
@@ -2001,8 +2001,8 @@ def generate_blog_article(article):
       font-size: 14px; font-weight: 600; color: #333;
       transition: color .2s, background .2s;
     }}
-    .lp-nav li a:hover {{ color: #6e8b74; background: #f0ede8; }}
-    .lp-nav li a[aria-current="page"] {{ color: #6e8b74; }}
+    .lp-nav li a:hover {{ color: #4e7a55; background: #f0ede8; }}
+    .lp-nav li a[aria-current="page"] {{ color: #4e7a55; }}
 
     /* ===== Hero ===== */
     .lp-hero {{
@@ -2023,9 +2023,9 @@ def generate_blog_article(article):
     /* ===== Breadcrumb ===== */
     .lp-breadcrumb {{
       max-width: 1200px; margin: 0 auto; padding: 16px 20px;
-      font-size: 13px; color: #888;
+      font-size: 13px; color: #767676;
     }}
-    .lp-breadcrumb a {{ color: #6e8b74; }}
+    .lp-breadcrumb a {{ color: #4e7a55; text-decoration: underline; }}
     .lp-breadcrumb span {{ margin: 0 6px; }}
 
     /* ===== Article content ===== */
@@ -2054,7 +2054,7 @@ def generate_blog_article(article):
 
     /* ===== CTA Banner ===== */
     .lp-cta-banner {{
-      background: #6e8b74; color: #fff;
+      background: #4e7a55; color: #fff;
       padding: 50px 20px; text-align: center;
     }}
     .lp-cta-banner__inner {{ max-width: 700px; margin: 0 auto; }}
@@ -2062,17 +2062,17 @@ def generate_blog_article(article):
       font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #fff;
     }}
     .lp-cta-banner p {{
-      font-size: 16px; margin-bottom: 24px; opacity: .9;
+      font-size: 16px; margin-bottom: 24px; color: #fff;
     }}
     .lp-cta-banner__btn {{
       display: inline-block;
       padding: 14px 36px;
-      background: #fff; color: #6e8b74;
+      background: #fff; color: #4e7a55;
       border-radius: 8px;
       font-size: 16px; font-weight: 700;
       transition: background .2s, transform .15s;
     }}
-    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #5a7a60; transform: translateY(-1px); }}
+    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #3a5f40; transform: translateY(-1px); }}
 
     /* ===== FAQ ===== */
     .lp-faq {{
@@ -2098,7 +2098,7 @@ def generate_blog_article(article):
     .lp-faq__question::after {{
       content: '+'; position: absolute; right: 0; top: 50%;
       transform: translateY(-50%);
-      font-size: 22px; font-weight: 300; color: #6e8b74;
+      font-size: 22px; font-weight: 300; color: #4e7a55;
       transition: transform .2s;
     }}
     details[open] .lp-faq__question::after {{
@@ -2132,7 +2132,7 @@ def generate_blog_article(article):
       font-size: 14px; font-weight: 600; color: #333;
       transition: border-color .2s, color .2s;
     }}
-    .lp-related li a:hover {{ border-color: #6e8b74; color: #6e8b74; }}
+    .lp-related li a:hover {{ border-color: #4e7a55; color: #4e7a55; }}
 
     /* ===== Footer ===== */
     .lp-footer {{
@@ -2162,7 +2162,7 @@ def generate_blog_article(article):
     .lp-footer__bottom {{
       max-width: 1200px; margin: 24px auto 0;
       padding-top: 20px; border-top: 1px solid #555;
-      font-size: 13px; color: #777; text-align: center;
+      font-size: 13px; color: #aaa; text-align: center;
     }}
 
     /* ===== WhatsApp Button ===== */
@@ -2491,8 +2491,8 @@ def generate_page(page):
       background: #fff;
       -webkit-font-smoothing: antialiased;
     }}
-    a {{ color: #6e8b74; text-decoration: none; transition: color .2s; }}
-    a:hover {{ color: #4a6b50; }}
+    a {{ color: #4e7a55; text-decoration: none; transition: color .2s; }}
+    a:hover {{ color: #3a5f40; }}
     img {{ max-width: 100%; height: auto; }}
 
     /* ===== Header ===== */
@@ -2515,7 +2515,7 @@ def generate_page(page):
     .lp-header__cta {{
       display: inline-block;
       padding: 10px 24px;
-      background: #7a8d7e;
+      background: #536b58;
       color: #fff;
       border-radius: 5px;
       font-family: 'Montserrat', Arial, sans-serif;
@@ -2524,7 +2524,7 @@ def generate_page(page):
       letter-spacing: 0.02em;
       transition: background .2s;
     }}
-    .lp-header__cta:hover {{ background: #6e8b74; color: #fff; }}
+    .lp-header__cta:hover {{ background: #4e7a55; color: #fff; }}
 
     /* Mobile menu toggle */
     .lp-header__menu-btn {{
@@ -2533,7 +2533,7 @@ def generate_page(page):
     }}
     .lp-header__menu-btn span {{
       display: block; position: absolute; width: 100%; height: 3px;
-      background: #7a8d7e; left: 0; transition: .25s;
+      background: #536b58; left: 0; transition: .25s;
     }}
     .lp-header__menu-btn span:nth-child(1) {{ top: 0; }}
     .lp-header__menu-btn span:nth-child(2) {{ top: 8px; }}
@@ -2552,8 +2552,8 @@ def generate_page(page):
       font-size: 14px; font-weight: 600; color: #333;
       transition: color .2s, background .2s;
     }}
-    .lp-nav li a:hover {{ color: #6e8b74; background: #f0ede8; }}
-    .lp-nav li a[aria-current="page"] {{ color: #6e8b74; }}
+    .lp-nav li a:hover {{ color: #4e7a55; background: #f0ede8; }}
+    .lp-nav li a[aria-current="page"] {{ color: #4e7a55; }}
 
     /* ===== Hero ===== */
     .lp-hero {{
@@ -2573,21 +2573,21 @@ def generate_page(page):
     .lp-hero__cta {{
       display: inline-block;
       padding: 14px 36px;
-      background: #6e8b74;
+      background: #4e7a55;
       color: #fff;
       border-radius: 8px;
       font-size: 16px; font-weight: 700;
       text-transform: uppercase;
       transition: background .2s, transform .15s;
     }}
-    .lp-hero__cta:hover {{ background: #5a7a60; color: #fff; transform: translateY(-1px); }}
+    .lp-hero__cta:hover {{ background: #3a5f40; color: #fff; transform: translateY(-1px); }}
 
     /* ===== Breadcrumb ===== */
     .lp-breadcrumb {{
       max-width: 1200px; margin: 0 auto; padding: 16px 20px;
-      font-size: 13px; color: #888;
+      font-size: 13px; color: #767676;
     }}
-    .lp-breadcrumb a {{ color: #6e8b74; }}
+    .lp-breadcrumb a {{ color: #4e7a55; text-decoration: underline; }}
     .lp-breadcrumb span {{ margin: 0 6px; }}
 
     /* ===== Content ===== */
@@ -2607,7 +2607,7 @@ def generate_page(page):
 
     /* ===== CTA Banner ===== */
     .lp-cta-banner {{
-      background: #6e8b74; color: #fff;
+      background: #4e7a55; color: #fff;
       padding: 50px 20px; text-align: center;
     }}
     .lp-cta-banner__inner {{ max-width: 700px; margin: 0 auto; }}
@@ -2615,17 +2615,17 @@ def generate_page(page):
       font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #fff;
     }}
     .lp-cta-banner p {{
-      font-size: 16px; margin-bottom: 24px; opacity: .9;
+      font-size: 16px; margin-bottom: 24px; color: #fff;
     }}
     .lp-cta-banner__btn {{
       display: inline-block;
       padding: 14px 36px;
-      background: #fff; color: #6e8b74;
+      background: #fff; color: #4e7a55;
       border-radius: 8px;
       font-size: 16px; font-weight: 700;
       transition: background .2s, transform .15s;
     }}
-    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #5a7a60; transform: translateY(-1px); }}
+    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #3a5f40; transform: translateY(-1px); }}
 
     /* ===== FAQ ===== */
     .lp-faq {{
@@ -2651,7 +2651,7 @@ def generate_page(page):
     .lp-faq__question::after {{
       content: '+'; position: absolute; right: 0; top: 50%;
       transform: translateY(-50%);
-      font-size: 22px; font-weight: 300; color: #6e8b74;
+      font-size: 22px; font-weight: 300; color: #4e7a55;
       transition: transform .2s;
     }}
     details[open] .lp-faq__question::after {{
@@ -2685,7 +2685,7 @@ def generate_page(page):
       font-size: 14px; font-weight: 600; color: #333;
       transition: border-color .2s, color .2s;
     }}
-    .lp-related li a:hover {{ border-color: #6e8b74; color: #6e8b74; }}
+    .lp-related li a:hover {{ border-color: #4e7a55; color: #4e7a55; }}
 
     /* ===== Footer ===== */
     .lp-footer {{
@@ -2715,7 +2715,7 @@ def generate_page(page):
     .lp-footer__bottom {{
       max-width: 1200px; margin: 24px auto 0;
       padding-top: 20px; border-top: 1px solid #555;
-      font-size: 13px; color: #777; text-align: center;
+      font-size: 13px; color: #aaa; text-align: center;
     }}
 
     /* ===== WhatsApp Button ===== */
@@ -3049,8 +3049,8 @@ def generate_blog_index():
       background: #fff;
       -webkit-font-smoothing: antialiased;
     }}
-    a {{ color: #6e8b74; text-decoration: none; transition: color .2s; }}
-    a:hover {{ color: #4a6b50; }}
+    a {{ color: #4e7a55; text-decoration: none; transition: color .2s; }}
+    a:hover {{ color: #3a5f40; }}
 
     /* ===== Header ===== */
     .lp-header {{
@@ -3072,7 +3072,7 @@ def generate_blog_index():
     .lp-header__cta {{
       display: inline-block;
       padding: 10px 24px;
-      background: #7a8d7e;
+      background: #536b58;
       color: #fff;
       border-radius: 5px;
       font-family: 'Montserrat', Arial, sans-serif;
@@ -3081,7 +3081,7 @@ def generate_blog_index():
       letter-spacing: 0.02em;
       transition: background .2s;
     }}
-    .lp-header__cta:hover {{ background: #6e8b74; color: #fff; }}
+    .lp-header__cta:hover {{ background: #4e7a55; color: #fff; }}
 
     /* ===== Navigation ===== */
     .lp-nav {{ background: #fafaf8; border-bottom: 1px solid #eee; }}
@@ -3096,8 +3096,8 @@ def generate_blog_index():
       font-size: 14px; font-weight: 600; color: #333;
       transition: color .2s, background .2s;
     }}
-    .lp-nav li a:hover {{ color: #6e8b74; background: #f0ede8; }}
-    .lp-nav li a[aria-current="page"] {{ color: #6e8b74; }}
+    .lp-nav li a:hover {{ color: #4e7a55; background: #f0ede8; }}
+    .lp-nav li a[aria-current="page"] {{ color: #4e7a55; }}
 
     /* ===== Hero ===== */
     .lp-hero {{
@@ -3118,9 +3118,9 @@ def generate_blog_index():
     /* ===== Breadcrumb ===== */
     .lp-breadcrumb {{
       max-width: 1200px; margin: 0 auto; padding: 16px 20px;
-      font-size: 13px; color: #888;
+      font-size: 13px; color: #767676;
     }}
-    .lp-breadcrumb a {{ color: #6e8b74; }}
+    .lp-breadcrumb a {{ color: #4e7a55; text-decoration: underline; }}
     .lp-breadcrumb span {{ margin: 0 6px; }}
 
     /* ===== Blog Grid ===== */
@@ -3148,7 +3148,7 @@ def generate_blog_index():
       margin-bottom: 8px; line-height: 1.3;
     }}
     .lp-blog-card h2 a {{ color: inherit; }}
-    .lp-blog-card h2 a:hover {{ color: #6e8b74; }}
+    .lp-blog-card h2 a:hover {{ color: #4e7a55; }}
     .lp-blog-card time {{
       display: block;
       font-size: 13px; color: #999;
@@ -3161,13 +3161,13 @@ def generate_blog_index():
     }}
     .lp-blog-card__link {{
       font-size: 14px; font-weight: 600;
-      color: #6e8b74;
+      color: #4e7a55;
     }}
-    .lp-blog-card__link:hover {{ color: #4a6b50; }}
+    .lp-blog-card__link:hover {{ color: #3a5f40; }}
 
     /* ===== CTA Banner ===== */
     .lp-cta-banner {{
-      background: #6e8b74; color: #fff;
+      background: #4e7a55; color: #fff;
       padding: 50px 20px; text-align: center;
     }}
     .lp-cta-banner__inner {{ max-width: 700px; margin: 0 auto; }}
@@ -3175,17 +3175,17 @@ def generate_blog_index():
       font-size: 28px; font-weight: 700; margin-bottom: 12px; color: #fff;
     }}
     .lp-cta-banner p {{
-      font-size: 16px; margin-bottom: 24px; opacity: .9;
+      font-size: 16px; margin-bottom: 24px; color: #fff;
     }}
     .lp-cta-banner__btn {{
       display: inline-block;
       padding: 14px 36px;
-      background: #fff; color: #6e8b74;
+      background: #fff; color: #4e7a55;
       border-radius: 8px;
       font-size: 16px; font-weight: 700;
       transition: background .2s, transform .15s;
     }}
-    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #5a7a60; transform: translateY(-1px); }}
+    .lp-cta-banner__btn:hover {{ background: #f0f0f0; color: #3a5f40; transform: translateY(-1px); }}
 
     /* ===== Footer ===== */
     .lp-footer {{
@@ -3215,7 +3215,7 @@ def generate_blog_index():
     .lp-footer__bottom {{
       max-width: 1200px; margin: 24px auto 0;
       padding-top: 20px; border-top: 1px solid #555;
-      font-size: 13px; color: #777; text-align: center;
+      font-size: 13px; color: #aaa; text-align: center;
     }}
 
     /* ===== WhatsApp Button ===== */
