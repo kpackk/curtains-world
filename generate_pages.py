@@ -10,7 +10,7 @@ semantic HTML files using a shared template. Each page includes:
 - FAQ section with FAQPage schema
 - BreadcrumbList schema
 - Footer with contacts
-- Analytics: GTM, Yandex.Metrika, Facebook Pixel
+- Analytics: GTM, Yandex.Metrika
 - WhatsApp floating button
 """
 
@@ -2287,21 +2287,6 @@ def generate_blog_article(article):
 
 {footer_html}
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)}};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','315622264851387');
-  fbq('track','PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=315622264851387&ev=PageView&noscript=1" alt="" /></noscript>
-
   <!-- Web Vitals → GTM -->
   <script>
   if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
@@ -2314,13 +2299,11 @@ def generate_blog_article(article):
     if(waBtn)waBtn.addEventListener('click',function(){{
       if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
       if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
-      if(window.fbq)fbq('track','Contact',{{content_name:'WhatsApp Float'}});
     }});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
       el.addEventListener('click',function(){{
         if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
         if(window.ym)ym(96561300,'reachGoal','phone_click');
-        if(window.fbq)fbq('track','Contact',{{content_name:'Phone'}});
       }});
     }});
     document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
@@ -2841,21 +2824,6 @@ def generate_page(page):
 
 {footer_html}
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)}};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','315622264851387');
-  fbq('track','PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=315622264851387&ev=PageView&noscript=1" alt="" /></noscript>
-
   <!-- Web Vitals → GTM -->
   <script>
   if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
@@ -2868,13 +2836,11 @@ def generate_page(page):
     if(waBtn)waBtn.addEventListener('click',function(){{
       if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
       if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
-      if(window.fbq)fbq('track','Contact',{{content_name:'WhatsApp Float'}});
     }});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
       el.addEventListener('click',function(){{
         if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
         if(window.ym)ym(96561300,'reachGoal','phone_click');
-        if(window.fbq)fbq('track','Contact',{{content_name:'Phone'}});
       }});
     }});
     document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
@@ -3310,21 +3276,6 @@ def generate_blog_index():
 
 {footer_html}
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {{if(f.fbq)return;n=f.fbq=function(){{n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)}};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}}(window,document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','315622264851387');
-  fbq('track','PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=315622264851387&ev=PageView&noscript=1" alt="" /></noscript>
-
   <!-- Web Vitals → GTM -->
   <script>
   if('PerformanceObserver' in window){{function sendToGTM(n,v){{if(window.dataLayer){{window.dataLayer.push({{event:'web_vitals',metric_name:n,metric_value:Math.round(v)}})}}}}try{{new PerformanceObserver(function(l){{var e=l.getEntries();sendToGTM('LCP',e[e.length-1].startTime)}}).observe({{type:'largest-contentful-paint',buffered:true}})}}catch(e){{}}var cls=0;try{{new PerformanceObserver(function(l){{l.getEntries().forEach(function(e){{if(!e.hadRecentInput)cls+=e.value}});sendToGTM('CLS',cls*1000)}}).observe({{type:'layout-shift',buffered:true}})}}catch(e){{}}}}
@@ -3337,13 +3288,11 @@ def generate_blog_index():
     if(waBtn)waBtn.addEventListener('click',function(){{
       if(window.dataLayer)dataLayer.push({{event:'whatsapp_click',click_source:'float_button'}});
       if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
-      if(window.fbq)fbq('track','Contact',{{content_name:'WhatsApp Float'}});
     }});
     document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
       el.addEventListener('click',function(){{
         if(window.dataLayer)dataLayer.push({{event:'phone_click'}});
         if(window.ym)ym(96561300,'reachGoal','phone_click');
-        if(window.fbq)fbq('track','Contact',{{content_name:'Phone'}});
       }});
     }});
     document.querySelectorAll('a[href^="tel:"],a[href*="wa.me"]').forEach(function(el){{
