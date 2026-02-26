@@ -42,9 +42,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - `BLOG_PRODUCT_RELATED` — какие продукты показывать на блог-странице
 5. **Builder-функции** — `build_nav_links_html()`, `build_faq_html()`, `build_cross_links()`, `build_related_blog_links()`, `build_related_product_links()`, `build_footer_html()`
 6. **Шаблоны** — `generate_blog_article()`, `generate_page()`, `generate_blog_index()` — полный HTML с inline CSS, аналитикой, schema
-7. **main()** — генерирует все 14 файлов
+7. **main()** — генерирует все 14 файлов + `sitemap.xml`
 
-**При добавлении нового блога** нужно обновить 4 места: `BLOG_ARTICLES`, `ALL_BLOG_ARTICLES`, `PRODUCT_BLOG_RELATED`, `BLOG_PRODUCT_RELATED`, а также `sitemap.xml`.
+**При добавлении нового блога** нужно обновить 4 места: `BLOG_ARTICLES`, `ALL_BLOG_ARTICLES`, `PRODUCT_BLOG_RELATED`, `BLOG_PRODUCT_RELATED`. `sitemap.xml` генерируется автоматически при запуске скрипта.
 
 Продуктовые страницы: BreadcrumbList + FAQPage + LocalBusiness + AggregateRating schema
 Блог-статьи: BreadcrumbList (3 уровня) + Article + FAQPage schema
@@ -67,7 +67,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | Скрипт | Назначение |
 |--------|-----------|
-| `generate_pages.py` | Генерирует 14 страниц (5 продуктов + 8 блогов + 1 индекс) |
+| `generate_pages.py` | Генерирует 14 страниц (5 продуктов + 8 блогов + 1 индекс) + `sitemap.xml` |
 | `optimize_images.py` | Конвертирует PNG/JPG → WebP через Pillow (качество 80) |
 | `clone_page.py` | Клонирует страницу, скачивает ассеты |
 | `download_fonts.py` | Скачивает Google Fonts (Ubuntu, Montserrat) → `assets/fonts/` |
@@ -75,9 +75,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Ассеты
 
-`assets/` — плоская структура (подпапки `js/` и `images/` удалены как дубликаты):
+`assets/` — плоская структура (подпапки `js/`, `images/`, `css/` удалены как дубликаты):
 - `fonts/` (17 woff2) — Ubuntu (300, 400, 500, 700) и Montserrat (100-900 variable). Все `@font-face` имеют `font-display: swap`
-- Корень `assets/` — WebP-изображения, JS-скрипты Tilda, CSS-файлы, `flags7.png` (спрайт флагов для телефонной маски)
+- Корень `assets/` — WebP-изображения, JS-скрипты Tilda, CSS-файлы
 
 **SEO:** `robots.txt`, `sitemap.xml` (15 URL), Schema.org JSON-LD на каждой странице, `favicon.ico` + `apple-touch-icon.png`
 
@@ -124,7 +124,7 @@ Performance 95 | Accessibility 100 | Best Practices 100 | SEO 100
 - Lazy-bundle JS: 5 файлов загружаются по scroll/touchstart (forms, hammer, animation, blocks, cards)
 - jQuery, tilda-products, tilda-slds — удалены (не используются)
 - Yandex.Metrika, GTM — удалены (чужие счётчики от оригинального клона)
-- Phone-mask flags sprite скачан локально (`assets/flags7.png`)
+- Phone-mask flags sprite: удалён (не использовался)
 
 ## Tilda-специфичные паттерны
 
