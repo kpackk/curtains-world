@@ -3175,6 +3175,62 @@ def generate_blog_index():
     return html
 
 
+def generate_sitemap():
+    """Generate sitemap.xml from page definitions."""
+    from datetime import date
+    today = date.today().isoformat()
+
+    urls = []
+
+    # Home page with image
+    urls.append(f"""  <url>
+    <loc>{BASE_URL}/home.html</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="{BASE_URL}/home.html" />
+    <lastmod>{today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>{BASE_URL}/assets/img_2024-02-07_14131410.webp</image:loc>
+      <image:title>Шторы на заказ в Дубае — Curtains World</image:title>
+    </image:image>
+  </url>""")
+
+    # Product pages
+    for page in PAGES:
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/{page['filename']}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    # Blog index
+    urls.append(f"""  <url>
+    <loc>{BASE_URL}/blog.html</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+
+    # Blog articles
+    for article in BLOG_ARTICLES:
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/{article['filename']}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>""")
+
+    xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{chr(10).join(urls)}
+</urlset>
+"""
+    return xml
+
+
 def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -3199,8 +3255,15 @@ def main():
         f.write(blog_html)
     print("Generated: blog.html")
 
-    total = len(PAGES) + len(BLOG_ARTICLES) + 1
-    print(f"\nDone! Generated {len(PAGES)} landing pages + {len(BLOG_ARTICLES)} blog articles + 1 blog index = {total} pages.")
+    # Sitemap
+    sitemap_xml = generate_sitemap()
+    sitemap_path = os.path.join(script_dir, "sitemap.xml")
+    with open(sitemap_path, "w", encoding="utf-8") as f:
+        f.write(sitemap_xml)
+    print("Generated: sitemap.xml")
+
+    total = len(PAGES) + len(BLOG_ARTICLES) + 1  # +1 for blog index
+    print(f"\nDone! Generated {len(PAGES)} landing pages + {len(BLOG_ARTICLES)} blog articles + 1 blog index + sitemap.xml = {total} pages + sitemap.")
 
 
 if __name__ == "__main__":
