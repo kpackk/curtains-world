@@ -10,7 +10,6 @@ semantic HTML files using a shared template. Each page includes:
 - FAQ section with FAQPage schema
 - BreadcrumbList schema
 - Footer with contacts
-- Analytics: Yandex.Metrika
 - WhatsApp floating button
 """
 
@@ -1922,16 +1921,6 @@ def generate_blog_article(article):
 {faq_schema}
   </script>
 
-  <!-- Yandex.Metrika -->
-  <script>
-  (function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};
-  m[i].l=1*new Date();
-  for(var j=0;j<document.scripts.length;j++){{if(document.scripts[j].src===r){{return;}}}}
-  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-  }})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-  ym(96561300,"init",{{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}});
-  </script>
-  <noscript><div><img alt="" src="https://mc.yandex.ru/watch/96561300" style="position:absolute;left:-9999px;" /></div></noscript>
 
   <style>
     /* ===== Reset & Base ===== */
@@ -2275,20 +2264,6 @@ def generate_blog_article(article):
 
 {footer_html}
 
-  <!-- Event Tracking -->
-  <script>
-  document.addEventListener('DOMContentLoaded',function(){{
-    var waBtn=document.querySelector('.wa-float');
-    if(waBtn)waBtn.addEventListener('click',function(){{
-      if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
-    }});
-    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
-      el.addEventListener('click',function(){{
-        if(window.ym)ym(96561300,'reachGoal','phone_click');
-      }});
-    }});
-  }});
-  </script>
 
   <!-- WhatsApp Float Button -->
   <a href="{WA_LINK}" target="_blank" rel="noopener" class="wa-float" aria-label="Написать в WhatsApp">
@@ -2416,16 +2391,6 @@ def generate_page(page):
 }}
   </script>
 
-  <!-- Yandex.Metrika -->
-  <script>
-  (function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};
-  m[i].l=1*new Date();
-  for(var j=0;j<document.scripts.length;j++){{if(document.scripts[j].src===r){{return;}}}}
-  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-  }})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-  ym(96561300,"init",{{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}});
-  </script>
-  <noscript><div><img alt="" src="https://mc.yandex.ru/watch/96561300" style="position:absolute;left:-9999px;" /></div></noscript>
 
   <style>
     /* ===== Reset & Base ===== */
@@ -2785,20 +2750,6 @@ def generate_page(page):
 
 {footer_html}
 
-  <!-- Event Tracking -->
-  <script>
-  document.addEventListener('DOMContentLoaded',function(){{
-    var waBtn=document.querySelector('.wa-float');
-    if(waBtn)waBtn.addEventListener('click',function(){{
-      if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
-    }});
-    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
-      el.addEventListener('click',function(){{
-        if(window.ym)ym(96561300,'reachGoal','phone_click');
-      }});
-    }});
-  }});
-  </script>
 
   <!-- WhatsApp Float Button -->
   <a href="{WA_LINK}" target="_blank" rel="noopener" class="wa-float" aria-label="Написать в WhatsApp">
@@ -2930,16 +2881,6 @@ def generate_blog_index():
 {collection_schema}
   </script>
 
-  <!-- Yandex.Metrika -->
-  <script>
-  (function(m,e,t,r,i,k,a){{m[i]=m[i]||function(){{(m[i].a=m[i].a||[]).push(arguments)}};
-  m[i].l=1*new Date();
-  for(var j=0;j<document.scripts.length;j++){{if(document.scripts[j].src===r){{return;}}}}
-  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-  }})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-  ym(96561300,"init",{{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true}});
-  </script>
-  <noscript><div><img alt="" src="https://mc.yandex.ru/watch/96561300" style="position:absolute;left:-9999px;" /></div></noscript>
 
   <style>
     /* ===== Reset & Base ===== */
@@ -3210,20 +3151,6 @@ def generate_blog_index():
 
 {footer_html}
 
-  <!-- Event Tracking -->
-  <script>
-  document.addEventListener('DOMContentLoaded',function(){{
-    var waBtn=document.querySelector('.wa-float');
-    if(waBtn)waBtn.addEventListener('click',function(){{
-      if(window.ym)ym(96561300,'reachGoal','whatsapp_click');
-    }});
-    document.querySelectorAll('a[href^="tel:"]').forEach(function(el){{
-      el.addEventListener('click',function(){{
-        if(window.ym)ym(96561300,'reachGoal','phone_click');
-      }});
-    }});
-  }});
-  </script>
 
   <!-- WhatsApp Float Button -->
   <a href="{WA_LINK}" target="_blank" rel="noopener" class="wa-float" aria-label="Написать в WhatsApp">

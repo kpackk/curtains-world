@@ -59,14 +59,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Аналитика и трекинг
 
-На сгенерированных страницах (product + blog):
-- **Yandex.Metrika:** 96561300 (единственный счётчик аналитики)
-- **Event tracking через Метрику:** `whatsapp_click`, `phone_click` (reachGoal)
-- **UTM capture:** sessionStorage для utm_source/medium/campaign/term/content
+Аналитика **удалена**: Yandex.Metrika 96561300 принадлежала оригинальному сайту (клон). GTM-контейнер GTM-W7SR8MSV также удалён ранее. При необходимости — добавить свой счётчик.
 
-На home.html: Yandex.Metrika 96561300 (напрямую).
-
-GTM и Facebook Pixel **удалены** — GTM-контейнер GTM-W7SR8MSV управлялся с недоступного аккаунта и загружал неиспользуемые теги (Google Ads, Pinterest).
+- **UTM capture:** sessionStorage для utm_source/medium/campaign/term/content (сохраняется на сгенерированных страницах)
 
 ### Python-утилиты
 
@@ -122,7 +117,7 @@ npx lighthouse https://kpackk.github.io/curtains-world/home.html --output=json -
 
 Performance 95 | Accessibility 100 | Best Practices 79 | SEO 100
 
-Best Practices 79 — единственная причина: third-party cookies Яндекс.Метрики (неустранимо).
+Best Practices 100 (после удаления Яндекс.Метрики — third-party cookies больше нет).
 
 ## Tilda-специфичные паттерны
 
