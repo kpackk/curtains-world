@@ -16,7 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Tilda-страница (home.html):**
 - `home.html` — основная русская версия (~650 строк, строки длинные — 50-100KB каждая, общий размер ~370KB)
 - Построена на Tilda-фреймворке: абсолютное позиционирование (T396), div-блоки с ID `recXXXXXX`
-- Зависит от Tilda CSS/JS из `assets/css/` и `assets/js/`
+- Зависит от Tilda CSS/JS из `assets/`
 - Schema.org JSON-LD: `HomeAndConstructionBusiness`, `LocalBusiness`, `FAQPage`, `ItemList`, `BreadcrumbList`
 
 **Генерируемые страницы (семантический HTML) — `generate_pages.py`:**
@@ -75,12 +75,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Ассеты
 
-`assets/` содержит как организованные подпапки, так и файлы в корне (legacy от clone_page.py):
-- `css/` (11 файлов) — Tilda CSS + `fonts.css`
-- `js/` (15 файлов) — jQuery 1.10.2 (defer), HammerJS, модули Tilda, tilda-phone-mask
+`assets/` — плоская структура (подпапки `js/` и `images/` удалены как дубликаты):
 - `fonts/` (17 woff2) — Ubuntu (300, 400, 500, 700) и Montserrat (100-900 variable). Все `@font-face` имеют `font-display: swap`
-- `images/` (21 файл) — только WebP
-- Корень `assets/` — 20 WebP-изображений, 14 JS-скриптов, 9 CSS-файлов (legacy, используются в home.html)
+- Корень `assets/` — WebP-изображения, JS-скрипты Tilda, CSS-файлы, `flags7.png` (спрайт флагов для телефонной маски)
 
 **SEO:** `robots.txt`, `sitemap.xml` (15 URL), Schema.org JSON-LD на каждой странице, `favicon.ico` + `apple-touch-icon.png`
 
@@ -110,22 +107,32 @@ npx lighthouse https://kpackk.github.io/curtains-world/home.html --output=json -
 - Деплой: `git push origin master` — GitHub Pages автоматически публикует из корня ветки `master`
 - `.nojekyll` в корне — отключает Jekyll. Без этого файлы с `_` в имени отдают 404
 - Файлы изображений переименованы с `_2024-*` → `img_2024-*` из-за Jekyll-ограничения
-- Preconnect: `mc.yandex.ru` добавлен в `<head>` на home.html
 - `tilda-forms-1.0.min.css` загружается асинхронно через `media="print" onload` на сгенерированных страницах
 
-## Lighthouse scores (сгенерированные страницы, февраль 2025)
+## Lighthouse scores
 
-Performance 95 | Accessibility 100 | Best Practices 79 | SEO 100
+**home.html (февраль 2026):**
+Performance 87-97 | Best Practices 96 | FCP 1.6s | TBT 10ms | CLS 0
 
-Best Practices 100 (после удаления Яндекс.Метрики — third-party cookies больше нет).
+**Сгенерированные страницы:**
+Performance 95 | Accessibility 100 | Best Practices 100 | SEO 100
+
+### Performance-оптимизации home.html
+- Render-blocking CSS: 124KB → 0 (deferred forms/animation/cards/date-picker/page CSS)
+- Critical CSS (2.6KB), fonts.css, grid CSS — inlined в `<head>`
+- Hero image: `fetchpriority="high"` на preload, сжат до 86KB
+- Lazy-bundle JS: 5 файлов загружаются по scroll/touchstart (forms, hammer, animation, blocks, cards)
+- jQuery, tilda-products, tilda-slds — удалены (не используются)
+- Yandex.Metrika, GTM — удалены (чужие счётчики от оригинального клона)
+- Phone-mask flags sprite скачан локально (`assets/flags7.png`)
 
 ## Tilda-специфичные паттерны
 
 ### Формы бронирования
-Формы `form849367596` (мобильная) и `form849367597` (десктопная) отправляют данные в WhatsApp (+971 58 940 8100). Tilda backend отключён: класс `js-form-proccess` заменён на `js-form-whatsapp`, `data-formactiontype="0"`. jQuery-обработчик submit собирает поля и открывает `wa.me`.
+Формы `form849367596` (мобильная) и `form849367597` (десктопная) отправляют данные в WhatsApp (+971 58 940 8100). Tilda backend отключён: класс `js-form-proccess` заменён на `js-form-whatsapp`, `data-formactiontype="0"`. Vanilla JS обработчик submit собирает поля и открывает `wa.me`.
 
 ### CTA-кнопки "Бесплатный замер"
-Кнопки `href="#booking"` прокручивают к форме через jQuery-обработчик с `setTimeout(50)` — задержка нужна, чтобы обойти Tilda-обработчики, которые перехватывают scroll. JS определяет видимую форму: `rec849367597` (десктоп, `screen-min 480px`) → fallback `rec849367595` (мобильная).
+Кнопки `href="#booking"` прокручивают к форме через vanilla JS обработчик с `setTimeout(50)` — задержка нужна, чтобы обойти Tilda-обработчики, которые перехватывают scroll. JS определяет видимую форму: `rec849367597` (десктоп, `screen-min 480px`) → fallback `rec849367595` (мобильная).
 
 ### Tilda исключает якоря `#order*`
 Tilda menu JS содержит `:not([href^="#order"])` — любые якоря, начинающиеся с `#order`, игнорируются. Поэтому используется `#booking`.
