@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 Статический сайт «Curtains World» — шторы на заказ в Дубае. Клон Tilda-сайта, полностью локализованный для автономного хостинга. Своего домена пока нет — сайт хостится на GitHub Pages. Ноль внешних CDN-зависимостей — все ассеты (JS, CSS, шрифты, изображения) скачаны локально. Все изображения в формате WebP. Единственная внешняя зависимость — виджет калькулятора ucalc.pro (загружается по scroll).
 
 **Хостинг:** GitHub Pages — https://kpackk.github.io/curtains-world/ (ветка `master`, `.nojekyll` отключает Jekyll)
+**VPS-зеркало:** http://195.226.92.111:8080/ (root@195.226.92.111, файлы в `/var/www/curtains-world/`)
 **Репозиторий:** https://github.com/kpackk/curtains-world
 
 ## Architecture
@@ -96,6 +97,9 @@ python3 generate_pages.py
 # Конвертировать изображения в WebP (требует: pip3 install Pillow)
 python3 optimize_images.py
 
+# Синхронизация на VPS
+sshpass -p '8t9sh6dT75Njw' rsync -avz --exclude='.git' --exclude='__pycache__' . root@195.226.92.111:/var/www/curtains-world/
+
 # Lighthouse-аудит (npx, без глобальной установки)
 npx lighthouse https://kpackk.github.io/curtains-world/home.html --output=json --chrome-flags="--headless --no-sandbox" --only-categories=performance,accessibility,best-practices,seo
 ```
@@ -104,7 +108,7 @@ npx lighthouse https://kpackk.github.io/curtains-world/home.html --output=json -
 
 ## GitHub Pages
 
-- Деплой: `git push origin master` — GitHub Pages автоматически публикует из корня ветки `master`
+- Деплой: `git push origin master` → GitHub Pages автоматически публикует, затем `rsync` на VPS
 - `.nojekyll` в корне — отключает Jekyll. Без этого файлы с `_` в имени отдают 404
 - Файлы изображений переименованы с `_2024-*` → `img_2024-*` из-за Jekyll-ограничения
 - `tilda-forms-1.0.min.css` загружается асинхронно через `media="print" onload` на сгенерированных страницах
@@ -118,11 +122,12 @@ Performance 87-97 | Best Practices 96 | FCP 1.6s | TBT 10ms | CLS 0
 Performance 95 | Accessibility 100 | Best Practices 100 | SEO 100
 
 ### Performance-оптимизации home.html
-- Render-blocking CSS: 124KB → 0 (deferred forms/animation/cards/date-picker/page CSS)
+- Render-blocking CSS: 124KB → 0 (deferred forms/animation/cards/date-picker/page CSS через `media="print" onload`)
 - Critical CSS (2.6KB), fonts.css, grid CSS — inlined в `<head>`
-- Hero image: `fetchpriority="high"` на preload, сжат до 86KB
-- Lazy-bundle JS: 5 файлов загружаются по scroll/touchstart (forms, hammer, animation, blocks, cards)
-- jQuery, tilda-products, tilda-slds — удалены (не используются)
+- Hero image: `fetchpriority="high"` на preload, `background-color:#e8e0d5` на div (anti-fringing)
+- Lazy-bundle JS: 5 файлов загружаются по scroll/touchstart (forms, hammer, animation, blocks, cards) — см. inline-скрипт в конце `<body>`
+- T843 init: inline paddingBottom + deferred `t843_init()` call (ждёт scroll для lazy JS)
+- jQuery (91KB), tilda-products, tilda-slds — удалены (не используются)
 - Yandex.Metrika, GTM — удалены (чужие счётчики от оригинального клона)
 - Phone-mask flags sprite: удалён (не использовался)
 
@@ -139,10 +144,16 @@ Tilda menu JS содержит `:not([href^="#order"])` — любые якор�
 
 ### Дублирование hero-блоков (T809 UTM)
 Tilda T809 создаёт **два** hero-блока:
-- `rec849367567` — СКРЫТЫЙ (display:none, UTM-логика)
-- `rec849367570` — ВИДИМЫЙ
+- `rec849367567` — desktop hero (screen-min 640px). По умолчанию visible, UTM-логика может переключить
+- `rec849367570` — альтернативный hero. По умолчанию hidden
 
-При редактировании hero проверяй `display` через JS.
+При редактировании hero изменяй **ОБА** блока и проверяй `display` через JS. Оба содержат одинаковый elem-id `1706914825479` для hero-изображения.
+
+### T843 блоки (текст + изображение)
+Блоки `rec849367581` (desktop) и `rec849367582` (mobile) содержат секции «Прозрачное ценообразование», «Премиум качество тканей», «Доставка и установка». Функция `t843_init` определена в `tilda-blocks-page61146805.min.js`, который загружается ЛЕНИВО (по scroll/touchstart). Поэтому используется inline-скрипт: сначала `paddingBottom` рассчитывается из `data-image-width`/`data-image-height`, затем `t843_init` вызывается отложенно после scroll.
+
+### Hero-изображение: диагональ и background-color
+`Mask_group.webp` (1680x1296, RGB) содержит диагональную линию: бежевая часть (#e7e0d5 из-за WebP-сжатия) + фото интерьера. Div-контейнер изображения имеет `background-color:#e8e0d5` (а не transparent), чтобы предотвратить тёмные артефакты при sub-pixel рендеринге `background-size:cover`.
 
 ### Позиционирование T396 (абсолютные блоки)
 Для мобильных breakpoints менять **два места**:
