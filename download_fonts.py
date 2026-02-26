@@ -19,7 +19,6 @@ unique_font_urls = list(set(font_urls))
 print(f"Found {len(unique_font_urls)} font files.")
 
 os.makedirs('assets/fonts', exist_ok=True)
-os.makedirs('assets/css', exist_ok=True)
 
 local_css_content = css_content
 
@@ -35,15 +34,15 @@ for url in unique_font_urls:
             f.write(fr.content)
             
         # Replace in CSS
-        # We want relative path from assets/css/fonts.css to assets/fonts/filename
-        # which is ../fonts/filename
-        local_css_content = local_css_content.replace(url, f'../fonts/{filename}')
+        # We want relative path from assets/fonts.css to assets/fonts/filename
+        # which is fonts/filename
+        local_css_content = local_css_content.replace(url, f'fonts/{filename}')
         
     except Exception as e:
         print(f"Failed to download {filename}: {e}")
 
 # Save local CSS
-with open('assets/css/fonts.css', 'w', encoding='utf-8') as f:
+with open('assets/fonts.css', 'w', encoding='utf-8') as f:
     f.write(local_css_content)
 
-print("Created assets/css/fonts.css")
+print("Created assets/fonts.css")
