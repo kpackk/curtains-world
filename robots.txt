@@ -1,9 +1,5 @@
 User-agent: *
-Allow: /
-Disallow: /assets/js/
-Disallow: /assets/css/
-Disallow: /*.json$
+Disallow: /
 
-Sitemap: https://kpackk.github.io/curtains-world/sitemap.xml
-
-# Curtains World — шторы на заказ в Дубае
+# This is a GitHub Pages mirror. The canonical site is https://curtains-me.com/
+# All crawling should happen there, not here.
